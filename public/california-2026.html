@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Donnelly Adventures - California 2026</title>
+  <meta name="description" content="The Donnelly Family California Adventure - January 23 - February 4, 2026">
+  <meta name="theme-color" content="#0d2818">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark: #0d2818;
+      --green-medium: #1a3d2a;
+      --green-light: #adebb3;
+      --gold: #efbf04;
+      --white: #e0e0e0;
+      --gray: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--green-dark);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(173,235,179,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(239,191,4,0.06) 0%, transparent 50%),
+        linear-gradient(135deg, #0d2818 0%, #1a3d2a 50%, #0d2818 100%);
+    }
+
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.unsplash.com/photo-1597466599360-3b9775841aec?w=1600&q=80') center/cover;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(239,191,4,0.2);
+      border: 2px solid var(--gold);
+      border-radius: 50px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--gold);
+      margin-bottom: 20px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239,191,4,0.4); }
+      50% { box-shadow: 0 0 0 15px rgba(239,191,4,0); }
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 10vw, 80px);
+      font-weight: 900;
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--green-light), var(--gold), var(--green-light));
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s ease-in-out infinite;
+      text-shadow: 0 0 60px rgba(173,235,179,0.3);
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .hero .subtitle {
+      font-size: clamp(16px, 4vw, 24px);
+      color: var(--green-light);
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    .hero .dates {
+      font-size: clamp(20px, 5vw, 32px);
+      color: var(--gold);
+      font-weight: 700;
+      margin-top: 15px;
+      text-shadow: 0 0 30px rgba(239,191,4,0.5);
+    }
+
+    /* Countdown */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: clamp(15px, 5vw, 40px);
+      margin-top: 40px;
+      padding: 30px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 20px;
+      border: 2px solid rgba(239,191,4,0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .countdown-item {
+      text-align: center;
+    }
+
+    .countdown-number {
+      font-size: clamp(40px, 12vw, 72px);
+      font-weight: 900;
+      color: var(--gold);
+      text-shadow: 0 0 40px rgba(239,191,4,0.6);
+      line-height: 1;
+    }
+
+    .countdown-label {
+      font-size: clamp(10px, 3vw, 14px);
+      color: var(--green-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 5px;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s ease-in-out infinite;
+      color: var(--gold);
+      font-size: 30px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(15px); }
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: flex;
+      justify-content: space-around;
+      background: linear-gradient(90deg, rgba(239,191,4,0.15), rgba(173,235,179,0.1), rgba(239,191,4,0.15));
+      padding: 30px 20px;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: clamp(32px, 8vw, 56px);
+      font-weight: 900;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(239,191,4,0.4);
+    }
+
+    .stat-label {
+      font-size: clamp(10px, 3vw, 14px);
+      color: var(--green-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* Section Styles */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: clamp(24px, 6vw, 36px);
+      color: var(--green-light);
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-left: 5px solid var(--gold);
+      padding-left: 20px;
+      text-shadow: 0 0 20px rgba(173,235,179,0.3);
+    }
+
+    /* Destination Cards */
+    .destination {
+      background: rgba(173,235,179,0.05);
+      border-radius: 24px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      border: 2px solid rgba(173,235,179,0.3);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3), 0 0 60px rgba(173,235,179,0.05);
+      transition: all 0.4s;
+    }
+
+    .destination:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 80px rgba(173,235,179,0.1);
+      border-color: var(--gold);
+    }
+
+    .destination-header {
+      padding: 25px 30px;
+      background: linear-gradient(135deg, rgba(173,235,179,0.2), rgba(239,191,4,0.1));
+      border-bottom: 2px solid rgba(239,191,4,0.3);
+    }
+
+    .destination-header h3 {
+      font-size: clamp(20px, 5vw, 28px);
+      color: var(--green-light);
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-booked {
+      background: rgba(173,235,179,0.3);
+      color: var(--green-light);
+      border: 1px solid var(--green-light);
+      box-shadow: 0 0 15px rgba(173,235,179,0.3);
+    }
+
+    .badge-fire {
+      background: rgba(239,191,4,0.3);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      box-shadow: 0 0 15px rgba(239,191,4,0.3);
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(239,191,4,0.3); }
+      50% { box-shadow: 0 0 25px rgba(239,191,4,0.6); }
+    }
+
+    .destination-dates {
+      color: var(--gold);
+      font-size: 15px;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4px;
+    }
+
+    .photo-grid img {
+      width: 100%;
+      height: clamp(150px, 30vw, 280px);
+      object-fit: cover;
+      transition: all 0.4s;
+      cursor: pointer;
+    }
+
+    .photo-grid img:hover {
+      transform: scale(1.03);
+      filter: brightness(1.1);
+    }
+
+    .destination-content {
+      padding: 25px 30px;
+    }
+
+    .destination-content p {
+      color: #aaa;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .destination-content strong {
+      color: var(--white);
+    }
+
+    .destination-content .highlight {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* Visual Calendar */
+    .visual-calendar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      padding: 30px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 20px;
+      border: 2px solid rgba(173,235,179,0.2);
+    }
+
+    .cal-day {
+      width: clamp(55px, 12vw, 75px);
+      padding: 12px 8px;
+      border-radius: 16px;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .cal-day:hover {
+      transform: scale(1.15) rotate(5deg);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .cal-day.today {
+      animation: todayPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes todayPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239,191,4,0.6); }
+      50% { box-shadow: 0 0 0 10px rgba(239,191,4,0); }
+    }
+
+    .cal-icon { font-size: clamp(24px, 6vw, 36px); margin-bottom: 5px; }
+    .cal-date { font-size: clamp(10px, 2.5vw, 12px); font-weight: 700; color: #fff; }
+    .cal-label { font-size: clamp(8px, 2vw, 10px); color: rgba(255,255,255,0.7); text-transform: uppercase; }
+
+    .cal-day.hockey { background: linear-gradient(135deg, #1a1a2e, #16213e); border: 2px solid #4a90a4; }
+    .cal-day.disney { background: linear-gradient(135deg, #2d1f3d, #1a1a2e); border: 2px solid #9b59b6; }
+    .cal-day.wolf { background: linear-gradient(135deg, #1e3a5f, #16213e); border: 2px solid #3498db; }
+    .cal-day.redding { background: linear-gradient(135deg, #1d4a1d, #0d2818); border: 2px solid #27ae60; }
+    .cal-day.home { background: linear-gradient(135deg, #3d2a00, #2d1f00); border: 2px solid var(--gold); }
+
+    .cal-legend {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    .cal-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+    }
+
+    .hockey-dot { background: #4a90a4; }
+    .disney-dot { background: #9b59b6; }
+    .wolf-dot { background: #3498db; }
+    .redding-dot { background: #27ae60; }
+
+    /* Highlights */
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .highlight-item {
+      background: rgba(173,235,179,0.08);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border: 1px solid rgba(173,235,179,0.2);
+      transition: all 0.3s;
+    }
+
+    .highlight-item:hover {
+      background: rgba(239,191,4,0.15);
+      border-color: var(--gold);
+      transform: translateX(10px);
+      box-shadow: 0 5px 20px rgba(239,191,4,0.2);
+    }
+
+    .highlight-item .emoji { font-size: 32px; }
+    .highlight-item .text { color: var(--white); font-size: 15px; }
+
+    /* Budget Section */
+    .budget-section {
+      background: linear-gradient(135deg, rgba(173,235,179,0.1), rgba(239,191,4,0.08));
+      border-radius: 24px;
+      padding: 40px;
+      border: 2px solid rgba(239,191,4,0.4);
+      box-shadow: 0 0 60px rgba(239,191,4,0.1);
+    }
+
+    .budget-total {
+      font-size: clamp(40px, 10vw, 64px);
+      color: var(--gold);
+      font-weight: 900;
+      text-align: center;
+      margin-top: 30px;
+      text-shadow: 0 0 40px rgba(239,191,4,0.5);
+    }
+
+    .budget-total small {
+      font-size: clamp(14px, 4vw, 20px);
+      color: var(--green-light);
+      display: block;
+      margin-top: 10px;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      background: rgba(0,0,0,0.4);
+      border-radius: 15px;
+      height: 30px;
+      margin: 30px 0;
+      overflow: hidden;
+      border: 2px solid rgba(173,235,179,0.3);
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, var(--green-light), var(--gold), var(--green-light));
+      background-size: 200% 100%;
+      height: 100%;
+      border-radius: 12px;
+      animation: progressShimmer 2s linear infinite;
+      box-shadow: 0 0 20px rgba(173,235,179,0.5);
+    }
+
+    @keyframes progressShimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .progress-label {
+      text-align: center;
+      color: var(--gold);
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid rgba(173,235,179,0.3);
+    }
+
+    th {
+      background: linear-gradient(90deg, var(--green-light), #7dd98a);
+      color: var(--green-dark);
+      padding: 16px 20px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    td {
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(173,235,179,0.15);
+      color: var(--white);
+      font-size: 14px;
+    }
+
+    tr:nth-child(even) td { background: rgba(173,235,179,0.05); }
+    tr:hover td { background: rgba(173,235,179,0.1); }
+
+    .booked { color: var(--green-light); font-weight: 700; }
+
+    /* Interactive Features */
+    .floating-actions {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 1000;
+    }
+
+    .fab {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+      transition: all 0.3s;
+    }
+
+    .fab:hover {
+      transform: scale(1.15);
+    }
+
+    .fab-photo {
+      background: linear-gradient(135deg, var(--gold), #f5d000);
+      color: var(--green-dark);
+    }
+
+    .fab-journal {
+      background: linear-gradient(135deg, var(--green-light), #7dd98a);
+      color: var(--green-dark);
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(10px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-content {
+      background: linear-gradient(135deg, var(--green-dark), var(--green-medium));
+      border: 2px solid var(--green-light);
+      border-radius: 24px;
+      padding: 30px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 100px rgba(173,235,179,0.1);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .modal-header h2 {
+      color: var(--green-light);
+      font-size: 24px;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--gray);
+      font-size: 32px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .modal-close:hover { color: var(--gold); }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      color: var(--green-light);
+      font-size: 13px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 14px;
+      background: rgba(0,0,0,0.3);
+      border: 2px solid rgba(173,235,179,0.3);
+      border-radius: 12px;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 15px;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .file-input-wrapper {
+      position: relative;
+      background: rgba(239,191,4,0.1);
+      border: 3px dashed var(--gold);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .file-input-wrapper:hover {
+      background: rgba(239,191,4,0.2);
+      border-style: solid;
+    }
+
+    .file-input-wrapper input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .file-input-wrapper .icon { font-size: 48px; }
+    .file-input-wrapper p { color: var(--gold); margin-top: 15px; font-weight: 600; }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--gold), #f5d000);
+      border: none;
+      border-radius: 12px;
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(239,191,4,0.4); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* Journal Display */
+    .journal-entries {
+      margin-top: 30px;
+    }
+
+    .journal-entry {
+      background: rgba(173,235,179,0.08);
+      border: 1px solid rgba(173,235,179,0.2);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 15px;
+      transition: all 0.3s;
+    }
+
+    .journal-entry:hover {
+      border-color: var(--gold);
+      transform: translateX(5px);
+    }
+
+    .journal-entry .author {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .journal-entry .date {
+      color: var(--gray);
+      font-size: 12px;
+      margin-left: 10px;
+    }
+
+    .journal-entry .content {
+      color: var(--white);
+      font-size: 15px;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+      margin-top: 30px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 8px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .gallery-item img, .gallery-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox img, .lightbox video {
+      max-width: 95%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: white;
+      font-size: 16px;
+      padding: 0 20px;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--green-light);
+      color: var(--green-dark);
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 15px;
+      z-index: 4000;
+      opacity: 0;
+      transition: opacity 0.3s;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .toast.show { opacity: 1; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(0deg, rgba(173,235,179,0.1), transparent);
+      border-top: 3px solid rgba(239,191,4,0.5);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer .love {
+      font-size: 60px;
+      margin-bottom: 20px;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .footer .trip-message {
+      font-size: clamp(18px, 5vw, 28px);
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-shadow: 0 0 30px rgba(239,191,4,0.5);
+    }
+
+    .footer .sub-message {
+      font-size: clamp(14px, 4vw, 20px);
+      color: var(--green-light);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray);
+    }
+
+    .empty-state .icon { font-size: 64px; margin-bottom: 20px; }
+    .empty-state p { font-size: 16px; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .photo-grid { grid-template-columns: 1fr; }
+      .floating-actions { bottom: 20px; right: 20px; }
+      .fab { width: 50px; height: 50px; font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-stars" id="stars"></div>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">The Ultimate Family Road Trip</div>
+      <h1>California<br>Adventure 2026</h1>
+      <div class="subtitle">The Donnelly Family</div>
+      <div class="dates">January 23 - February 4</div>
+
+      <div class="countdown">
+        <div class="countdown-item">
+          <div class="countdown-number" id="days">--</div>
+          <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="hours">--</div>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="minutes">--</div>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="seconds">--</div>
+          <div class="countdown-label">Seconds</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">↓</div>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-num">13</div>
+      <div class="stat-label">Days</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Nights</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Destinations</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1,932</div>
+      <div class="stat-label">Miles</div>
+    </div>
+  </div>
+
+  <!-- Route Overview -->
+  <section style="padding-top: 40px; padding-bottom: 20px;">
+    <div style="background: rgba(239,191,4,0.1); border: 2px solid rgba(239,191,4,0.3); border-radius: 16px; padding: 25px; text-align: center;">
+      <h3 style="color: var(--gold); margin-bottom: 15px; font-size: 18px;">🚗 The Route from Sherwood, OR</h3>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; font-size: 14px;">
+        <span style="background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 20px; color: var(--white);">Sherwood → San Jose <strong style="color: var(--gold);">580 mi</strong></span>
+        <span style="color: var(--gold);">→</span>
+        <span style="background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 20px; color: var(--white);">Anaheim <strong style="color: var(--gold);">366 mi</strong></span>
+        <span style="color: var(--gold);">→</span>
+        <span style="background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 20px; color: var(--white);">Great Wolf <strong style="color: var(--gold);">3 mi</strong></span>
+        <span style="color: var(--gold);">→</span>
+        <span style="background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 20px; color: var(--white);">Redding <strong style="color: var(--gold);">573 mi</strong></span>
+        <span style="color: var(--gold);">→</span>
+        <span style="background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 20px; color: var(--white);">Home! <strong style="color: var(--gold);">410 mi</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Where We're Staying -->
+  <section>
+    <h2 class="section-title">🏨 Where We're Staying</h2>
+
+    <!-- San Jose -->
+    <div class="destination">
+      <div class="destination-header">
+        <h3>🦈 San Jose - Sharks Game Night <span class="badge badge-booked">✓ BOOKED</span></h3>
+        <div class="destination-dates">Friday, Jan 23 • 1 Night • 580 miles from Sherwood</div>
+      </div>
+      <div class="photo-grid">
+        <img src="https://media.d3.nhle.com/image/private/t_ratio16_9-size40/dpr_2.0/f_png/v1732025093/prd/l8y3g90ap8awanthfuw3.png" alt="San Jose Sharks">
+        <img src="https://media.video-cdn.espn.com/motion/2025/1023/e75096bbf0764d928b4b19a39a57aabf1298/e75096bbf0764d928b4b19a39a57aabf1298.jpg" alt="Sharks Hockey Game">
+      </div>
+      <div class="destination-content">
+        <p><span class="highlight">Sharks vs Rangers @ SAP Center</span> - Section 127, Row 15, <strong>CLUB SEATS!</strong> 🔥<br>
+        Leave Sherwood at 6am, 9-hour drive, game at 7pm. Club seats include premium amenities and incredible views of the ice.</p>
+      </div>
+    </div>
+
+    <!-- Disneyland -->
+    <div class="destination">
+      <div class="destination-header">
+        <h3>🏰 Disneyland Hotel - 1 Bedroom Suite <span class="badge badge-booked">✓ BOOKED</span> <span class="badge badge-fire">🔥 7 NIGHTS</span></h3>
+        <div class="destination-dates">Saturday, Jan 24 - Saturday, Jan 31 • 366 miles from San Jose</div>
+      </div>
+      <div class="photo-grid">
+        <img src="https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/dlr/things-to-do/sports-and-recreation-centers/disneyland-hotel/pools-at-disneyland-hotel/pools-disneyland-hotel-04.jpg?1743792166313" alt="Disneyland Hotel Pool">
+        <img src="https://playgroundhb.com/cdn/shop/files/Screenshot_2025-08-07_at_11.04.25_PM.png?v=1754633103&width=1600" alt="Arcade Fun">
+      </div>
+      <div class="photo-grid">
+        <img src="https://www.disneytouristblog.com/wp-content/uploads/2025/05/wondrous-journeys-fireworks-disneyland-70th-anniversary-california-854.jpg" alt="Disney Fireworks">
+        <img src="https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/big-thunder-mountain-railroad/big-thunder-mountain-railroad-00.jpg?1765208789463" alt="Big Thunder Mountain">
+      </div>
+      <div class="destination-content">
+        <p><span class="highlight">4 Park Days:</span> Disneyland (Sun, Tue, Fri) + California Adventure (Thu)<br>
+        <span class="highlight">Must-Do:</span> Cars Land, Avengers Campus, World of Color, 🎆 <strong>Paint the Night Parade!</strong><br>
+        <span class="highlight">Rest Days:</span> Pool, Downtown Disney, 🏖️ Huntington Beach sunset at Steph's Place!</p>
+      </div>
+    </div>
+
+    <!-- Great Wolf Lodge -->
+    <div class="destination">
+      <div class="destination-header">
+        <h3>🌊 Great Wolf Lodge SoCal <span class="badge badge-booked">✓ BOOKED</span></h3>
+        <div class="destination-dates">Saturday, Jan 31 - Monday, Feb 2 • 2 Nights • 3 miles from Disney</div>
+      </div>
+      <div class="photo-grid">
+        <img src="https://www.momrewritten.com/wp-content/uploads/2025/11/Great-wolf-lodge-wave-pool-overview-728x546.jpg.webp" alt="Great Wolf Lodge Wave Pool">
+        <img src="https://www.rci.com/static/Resorts/Assets/RP71E01L.jpg" alt="Great Wolf Lodge Waterpark">
+      </div>
+      <div class="photo-grid">
+        <img src="https://californiathroughmylens.com/wp-content/uploads/2017/01/medieval-times-13.jpg" alt="Medieval Times">
+        <img src="https://www.greatwolf.com/content/dam/greatwolf/sites/www/things-to-do/attractions/build-a-bear/md-bab-workshop-2.jpg" alt="Build-A-Bear Workshop">
+      </div>
+      <div class="destination-content">
+        <p><span class="highlight">Full waterpark access!</span> 105,000 sq ft indoor waterpark - slides, wave pool, lazy river, MagiQuest!<br>
+        <span class="highlight">Saturday night:</span> ⚔️ <strong>Medieval Times 7:30pm</strong> - Celebration Upgrade + Glow Sword!</p>
+      </div>
+    </div>
+
+    <!-- Sheraton Redding -->
+    <div class="destination">
+      <div class="destination-header">
+        <h3>🏨 Sheraton Redding - Presidential Suite <span class="badge badge-booked">✓ BOOKED</span> <span class="badge badge-fire">🔥 PRESIDENTIAL</span></h3>
+        <div class="destination-dates">Monday, Feb 2 - Wednesday, Feb 4 • 2 Nights • 573 miles from Great Wolf</div>
+      </div>
+      <div class="photo-grid">
+        <img src="https://cache.marriott.com/content/dam/marriott-renditions/RDDSI/rddsi-exterior-2636-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=750px:*" alt="Sheraton Redding Exterior">
+        <img src="https://drupal-prod.visitcalifornia.com/sites/default/files/styles/fluid_1920/public/VCW_D_SC_T4-Sundial%20Bridge_i-8p9WWv_R-L.jpg_KG.jpg.webp?itok=ewh2xT0N" alt="Sundial Bridge">
+      </div>
+      <div class="photo-grid">
+        <img src="https://images.squarespace-cdn.com/content/v1/591d131d17bffc24f111e867/1591037067920-FUSKLSXQBYX7CKC9KIHZ/1T0A0051.jpg" alt="Turtle Bay">
+        <img src="https://krcrtv.com/resources/media2/16x9/3024/986/0x1166/90/85acdc73-4f19-4f05-84ff-e4662f147cb4-Image31.jpg" alt="Shasta Caverns">
+      </div>
+      <div class="destination-content">
+        <p><span class="highlight">The nicest room in Redding!</span> 1,100 sq ft Presidential Suite with 3 showers, pool view balcony.<br>
+        <span class="highlight">Club Lounge:</span> Wine, charcuterie, cookies at happy hour + full breakfast!<br>
+        <span class="highlight">Adventures:</span> 🌉 Sundial Bridge evening walk, 🚤 Shasta Caverns 12pm Tue, 🐢 Turtle Bay 9am Wed<br>
+        <span class="highlight">Home:</span> 410 miles back to Sherwood!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visual Calendar -->
+  <section>
+    <h2 class="section-title">📅 Our Adventure Calendar</h2>
+
+    <div class="visual-calendar">
+      <div class="cal-day hockey"><div class="cal-icon">🏒</div><div class="cal-date">Jan 23</div><div class="cal-label">Fri</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🚗</div><div class="cal-date">Jan 24</div><div class="cal-label">Sat</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 25</div><div class="cal-label">Sun</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏝️</div><div class="cal-date">Jan 26</div><div class="cal-label">Mon</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 27</div><div class="cal-label">Tue</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏖️</div><div class="cal-date">Jan 28</div><div class="cal-label">Wed</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🎢</div><div class="cal-date">Jan 29</div><div class="cal-label">Thu</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🎆</div><div class="cal-date">Jan 30</div><div class="cal-label">Fri</div></div>
+      <div class="cal-day wolf"><div class="cal-icon">⚔️</div><div class="cal-date">Jan 31</div><div class="cal-label">Sat</div></div>
+      <div class="cal-day wolf"><div class="cal-icon">🌊</div><div class="cal-date">Feb 1</div><div class="cal-label">Sun</div></div>
+      <div class="cal-day redding"><div class="cal-icon">🌉</div><div class="cal-date">Feb 2</div><div class="cal-label">Mon</div></div>
+      <div class="cal-day redding"><div class="cal-icon">🚤</div><div class="cal-date">Feb 3</div><div class="cal-label">Tue</div></div>
+      <div class="cal-day home"><div class="cal-icon">🏠</div><div class="cal-date">Feb 4</div><div class="cal-label">Wed</div></div>
+    </div>
+
+    <div class="cal-legend">
+      <span class="cal-legend-item"><span class="legend-dot hockey-dot"></span> Hockey</span>
+      <span class="cal-legend-item"><span class="legend-dot disney-dot"></span> Disney</span>
+      <span class="cal-legend-item"><span class="legend-dot wolf-dot"></span> Great Wolf</span>
+      <span class="cal-legend-item"><span class="legend-dot redding-dot"></span> Redding</span>
+    </div>
+  </section>
+
+  <!-- Trip Highlights -->
+  <section>
+    <h2 class="section-title">✨ Trip Highlights</h2>
+
+    <div class="highlights">
+      <div class="highlight-item"><span class="emoji">🦈</span><span class="text">Sharks vs Rangers - CLUB SEATS!</span></div>
+      <div class="highlight-item"><span class="emoji">🍲</span><span class="text">Pea Soup Andersen's</span></div>
+      <div class="highlight-item"><span class="emoji">🏰</span><span class="text">7 Nights Disneyland Hotel 1BR Suite</span></div>
+      <div class="highlight-item"><span class="emoji">🎆</span><span class="text">Paint the Night Parade</span></div>
+      <div class="highlight-item"><span class="emoji">🏖️</span><span class="text">Steph's Place - Huntington Beach</span></div>
+      <div class="highlight-item"><span class="emoji">⚔️</span><span class="text">Medieval Times - Celebration + Glow Sword</span></div>
+      <div class="highlight-item"><span class="emoji">🌊</span><span class="text">2 Nights Great Wolf Lodge</span></div>
+      <div class="highlight-item"><span class="emoji">🌉</span><span class="text">Sundial Bridge</span></div>
+      <div class="highlight-item"><span class="emoji">🚤</span><span class="text">Shasta Caverns (Boat + Cave)</span></div>
+      <div class="highlight-item"><span class="emoji">🐢</span><span class="text">Turtle Bay Exploration Park</span></div>
+      <div class="highlight-item"><span class="emoji">🏨</span><span class="text">Sheraton Presidential Suite + Club 🔥</span></div>
+      <div class="highlight-item"><span class="emoji">⚡</span><span class="text">Lightning Lane - Skip the lines!</span></div>
+    </div>
+  </section>
+
+  <!-- Family Memories -->
+  <section>
+    <h2 class="section-title">📸 Family Memories</h2>
+    <p style="color: var(--gray); margin-bottom: 20px;">Upload photos and videos during the trip - everyone can contribute!</p>
+
+    <div class="gallery-section">
+      <div id="gallery-container" class="gallery-grid">
+        <!-- Photos load here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Family Journal -->
+  <section>
+    <h2 class="section-title">📝 Family Journal</h2>
+    <p style="color: var(--gray); margin-bottom: 20px;">Write memories, thoughts, and favorite moments throughout the trip!</p>
+
+    <div id="journal-entries" class="journal-entries">
+      <!-- Journal entries load here -->
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="love">💚</div>
+    <div class="trip-message" id="footer-message">6 DAYS UNTIL THE ADVENTURE!</div>
+    <div class="sub-message">This is going to be AMAZING!</div>
+    <div style="color: var(--green-light); margin-top: 15px;">13 days of adventures together 💛</div>
+  </div>
+
+  <!-- Floating Action Buttons -->
+  <div class="floating-actions">
+    <button class="fab fab-photo" onclick="openModal('upload')" title="Add Photo">📷</button>
+    <button class="fab fab-journal" onclick="openModal('journal')" title="Write Entry">✏️</button>
+  </div>
+
+  <!-- Upload Modal -->
+  <div class="modal" id="modal-upload">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>📷 Add Memory</h2>
+        <button class="modal-close" onclick="closeModal('upload')">&times;</button>
+      </div>
+      <form id="upload-form">
+        <div class="form-group">
+          <div class="file-input-wrapper">
+            <span class="icon">📷</span>
+            <p>Tap to select photo or video</p>
+            <input type="file" accept="image/*,video/*" id="file-input" capture="environment">
+          </div>
+          <div id="file-preview" style="margin-top: 15px; display: none;">
+            <img id="preview-img" style="max-width: 100%; border-radius: 12px;">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Who's Uploading?</label>
+          <select id="upload-name">
+            <option value="">Select family member...</option>
+            <option value="Brandon">Brandon</option>
+            <option value="Racheal">Racheal</option>
+            <option value="Olivia">Olivia</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Caption</label>
+          <input type="text" id="upload-caption" placeholder="What's happening?">
+        </div>
+        <div class="form-group">
+          <label>Which Day?</label>
+          <select id="upload-day">
+            <option value="">Select a day...</option>
+            <option value="1">Day 1 - San Jose / Sharks Game</option>
+            <option value="2">Day 2 - Drive to Disney</option>
+            <option value="3">Day 3 - Disneyland</option>
+            <option value="4">Day 4 - Pool Day</option>
+            <option value="5">Day 5 - Disneyland with Steph</option>
+            <option value="6">Day 6 - Beach Day</option>
+            <option value="7">Day 7 - California Adventure</option>
+            <option value="8">Day 8 - Disneyland / Parade</option>
+            <option value="9">Day 9 - Great Wolf / Medieval Times</option>
+            <option value="10">Day 10 - Great Wolf Waterpark</option>
+            <option value="11">Day 11 - Drive to Redding</option>
+            <option value="12">Day 12 - Shasta Caverns</option>
+            <option value="13">Day 13 - Turtle Bay / Home</option>
+          </select>
+        </div>
+        <button type="submit" class="btn" id="upload-btn">Upload Memory</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Journal Modal -->
+  <div class="modal" id="modal-journal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>✏️ Write Entry</h2>
+        <button class="modal-close" onclick="closeModal('journal')">&times;</button>
+      </div>
+      <form id="journal-form">
+        <div class="form-group">
+          <label>Who's Writing?</label>
+          <select id="journal-name">
+            <option value="">Select family member...</option>
+            <option value="Brandon">Brandon</option>
+            <option value="Racheal">Racheal</option>
+            <option value="Olivia">Olivia</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Which Day?</label>
+          <select id="journal-day">
+            <option value="">General / No specific day</option>
+            <option value="1">Day 1 - San Jose</option>
+            <option value="2">Day 2 - Drive to Disney</option>
+            <option value="3">Day 3 - Disneyland</option>
+            <option value="4">Day 4 - Pool Day</option>
+            <option value="5">Day 5 - Disneyland with Steph</option>
+            <option value="6">Day 6 - Beach Day</option>
+            <option value="7">Day 7 - California Adventure</option>
+            <option value="8">Day 8 - Disneyland / Parade</option>
+            <option value="9">Day 9 - Great Wolf / Medieval Times</option>
+            <option value="10">Day 10 - Great Wolf Waterpark</option>
+            <option value="11">Day 11 - Drive to Redding</option>
+            <option value="12">Day 12 - Shasta Caverns</option>
+            <option value="13">Day 13 - Turtle Bay / Home</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Thoughts</label>
+          <textarea id="journal-content" placeholder="What's on your mind? How are you feeling? What was your favorite part?"></textarea>
+        </div>
+        <button type="submit" class="btn">Post Entry</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightbox-img" src="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // Create stars
+    function createStars() {
+      const container = document.getElementById('stars');
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        container.appendChild(star);
+      }
+    }
+    createStars();
+
+    // Countdown
+    function updateCountdown() {
+      const tripStart = new Date('2026-01-23T06:00:00');
+      const now = new Date();
+      const diff = tripStart - now;
+
+      if (diff <= 0) {
+        document.querySelector('.countdown').innerHTML = '<div style="font-size: 36px; color: var(--gold); font-weight: 900;">THE ADVENTURE HAS BEGUN! 🎉</div>';
+        document.getElementById('footer-message').textContent = "WE'RE ON OUR ADVENTURE!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+
+      document.getElementById('footer-message').textContent = `${days} DAYS UNTIL THE ADVENTURE!`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Modal controls
+    function openModal(type) {
+      document.getElementById(`modal-${type}`).classList.add('active');
+    }
+
+    function closeModal(type) {
+      document.getElementById(`modal-${type}`).classList.remove('active');
+    }
+
+    // File preview
+    document.getElementById('file-input').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('preview-img').src = e.target.result;
+          document.getElementById('file-preview').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Upload form
+    document.getElementById('upload-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const file = document.getElementById('file-input').files[0];
+      if (!file) {
+        showToast('Please select a photo or video');
+        return;
+      }
+
+      const btn = document.getElementById('upload-btn');
+      btn.disabled = true;
+      btn.textContent = 'Uploading...';
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('uploaded_by', document.getElementById('upload-name').value || 'Anonymous');
+      formData.append('caption', document.getElementById('upload-caption').value);
+      formData.append('day_number', document.getElementById('upload-day').value);
+
+      try {
+        const res = await fetch('/api/photos', { method: 'POST', body: formData });
+        if (res.ok) {
+          showToast('Memory uploaded! 📸');
+          closeModal('upload');
+          document.getElementById('upload-form').reset();
+          document.getElementById('file-preview').style.display = 'none';
+          loadPhotos();
+        } else {
+          showToast('Upload failed - check Cloudinary setup');
+        }
+      } catch (err) {
+        showToast('Upload failed - check Cloudinary setup');
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Upload Memory';
+    });
+
+    // Journal form
+    document.getElementById('journal-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const content = document.getElementById('journal-content').value.trim();
+      if (!content) {
+        showToast('Please write something');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/journal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            author: document.getElementById('journal-name').value || 'Anonymous',
+            content: content,
+            day_number: document.getElementById('journal-day').value || null
+          })
+        });
+
+        if (res.ok) {
+          showToast('Entry posted! ✏️');
+          closeModal('journal');
+          document.getElementById('journal-form').reset();
+          loadJournal();
+        }
+      } catch (err) {
+        showToast('Failed to post');
+      }
+    });
+
+    // Load photos
+    async function loadPhotos() {
+      const container = document.getElementById('gallery-container');
+
+      try {
+        const res = await fetch('/api/photos');
+        const photos = await res.json();
+
+        if (photos.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state" style="grid-column: 1/-1;">
+              <div class="icon">📷</div>
+              <p>No photos yet - be the first to add a memory!</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = photos.map(photo => `
+          <div class="gallery-item" onclick="openLightbox('${photo.url}', '${photo.caption || ''}')">
+            ${photo.type === 'video'
+              ? `<video src="${photo.url}" muted></video>`
+              : `<img src="${photo.url}" alt="${photo.caption || ''}">`
+            }
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;"><div class="icon">📷</div><p>Upload photos during the trip!</p></div>';
+      }
+    }
+
+    // Load journal
+    async function loadJournal() {
+      const container = document.getElementById('journal-entries');
+
+      try {
+        const res = await fetch('/api/journal');
+        const entries = await res.json();
+
+        if (entries.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <div class="icon">📝</div>
+              <p>No entries yet - write the first family memory!</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = entries.map(entry => {
+          const date = new Date(entry.created_at).toLocaleDateString('en-US', {
+            month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
+          });
+          return `
+            <div class="journal-entry">
+              <span class="author">${entry.author}</span>
+              <span class="date">${date}</span>
+              ${entry.day_number ? `<span class="date">• Day ${entry.day_number}</span>` : ''}
+              <div class="content">${entry.content}</div>
+            </div>
+          `;
+        }).join('');
+      } catch (err) {
+        container.innerHTML = '<div class="empty-state"><div class="icon">📝</div><p>Write memories during the trip!</p></div>';
+      }
+    }
+
+    // Lightbox
+    function openLightbox(url, caption) {
+      document.getElementById('lightbox-img').src = url;
+      document.getElementById('lightbox-caption').textContent = caption;
+      document.getElementById('lightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Toast
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // Save selected family member to localStorage
+    const savedName = localStorage.getItem('donnellyName') || '';
+    if (savedName) {
+      document.getElementById('upload-name').value = savedName;
+      document.getElementById('journal-name').value = savedName;
+    }
+
+    document.getElementById('upload-name').addEventListener('change', function() {
+      localStorage.setItem('donnellyName', this.value);
+      document.getElementById('journal-name').value = this.value;
+    });
+
+    document.getElementById('journal-name').addEventListener('change', function() {
+      localStorage.setItem('donnellyName', this.value);
+      document.getElementById('upload-name').value = this.value;
+    });
+
+    // Initial load
+    loadPhotos();
+    loadJournal();
+
+    // Close modals on escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal('upload');
+        closeModal('journal');
+        closeLightbox();
+      }
+    });
+  </script>
+
+</body>
+</html>
