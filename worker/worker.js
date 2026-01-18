@@ -26,23 +26,25 @@ export default {
         const apiSecret = env.CLOUDINARY_API_SECRET;
 
         const auth = btoa(`${apiKey}:${apiSecret}`);
+        // Fetch from the donnelly-adventures folder
         const response = await fetch(
-          `https://api.cloudinary.com/v1_1/${cloudName}/resources/image/tags/california2026?max_results=100`,
+          `https://api.cloudinary.com/v1_1/${cloudName}/resources/image?prefix=donnelly-adventures&max_results=100&type=upload`,
           {
             headers: { 'Authorization': `Basic ${auth}` }
           }
         );
 
         const data = await response.json();
-        const photos = (data.resources || []).map(r => ({
-          id: r.public_id,
-          url: r.secure_url,
-          created_at: r.created_at,
-          // Extract metadata from context if available
-          caption: r.context?.custom?.caption || '',
-          uploaded_by: r.context?.custom?.uploaded_by || '',
-          day_number: r.context?.custom?.day_number || ''
-        }));
+        const photos = (data.resources || [])
+          .filter(r => r.asset_folder === 'donnelly-adventures')
+          .map(r => ({
+            id: r.public_id,
+            url: r.secure_url,
+            created_at: r.created_at,
+            uploaded_by: r.context?.custom?.uploaded_by || '',
+            day_number: r.context?.custom?.day_number || ''
+          }))
+          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
         return new Response(JSON.stringify(photos), {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
