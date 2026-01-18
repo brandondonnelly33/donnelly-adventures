@@ -3,9 +3,9 @@ main = "worker.js"
 compatibility_date = "2024-01-01"
 
 # KV namespace for journal entries
-kv_namespaces = [
-  { binding = "JOURNAL", id = "REPLACE_WITH_KV_ID" }
-]
+[[kv_namespaces]]
+binding = "JOURNAL"
+id = "71806b9180c244de86b80cea80d01280"
 
 # Environment variables (set these in Cloudflare dashboard)
 # CLOUDINARY_CLOUD_NAME = "dpazcxxyp"
