@@ -1,0 +1,13 @@
+name = "donnelly-api"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# KV namespace for journal entries
+kv_namespaces = [
+  { binding = "JOURNAL", id = "REPLACE_WITH_KV_ID" }
+]
+
+# Environment variables (set these in Cloudflare dashboard)
+# CLOUDINARY_CLOUD_NAME = "dpazcxxyp"
+# CLOUDINARY_API_KEY = "your-api-key"
+# CLOUDINARY_API_SECRET = "your-api-secret"

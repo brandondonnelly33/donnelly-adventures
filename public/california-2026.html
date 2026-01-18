@@ -8,6 +8,8 @@
   <meta name="theme-color" content="#0d2818">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <!-- Cloudinary Upload Widget -->
+  <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1162,51 +1164,36 @@
         <h2>📷 Add Memory</h2>
         <button class="modal-close" onclick="closeModal('upload')">&times;</button>
       </div>
-      <form id="upload-form">
-        <div class="form-group">
-          <div class="file-input-wrapper">
-            <span class="icon">📷</span>
-            <p>Tap to select photo or video</p>
-            <input type="file" accept="image/*,video/*" id="file-input" capture="environment">
-          </div>
-          <div id="file-preview" style="margin-top: 15px; display: none;">
-            <img id="preview-img" style="max-width: 100%; border-radius: 12px;">
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Who's Uploading?</label>
-          <select id="upload-name">
-            <option value="">Select family member...</option>
-            <option value="Brandon">Brandon</option>
-            <option value="Racheal">Racheal</option>
-            <option value="Olivia">Olivia</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Caption</label>
-          <input type="text" id="upload-caption" placeholder="What's happening?">
-        </div>
-        <div class="form-group">
-          <label>Which Day?</label>
-          <select id="upload-day">
-            <option value="">Select a day...</option>
-            <option value="1">Day 1 - San Jose / Sharks Game</option>
-            <option value="2">Day 2 - Drive to Disney</option>
-            <option value="3">Day 3 - Disneyland</option>
-            <option value="4">Day 4 - Pool Day</option>
-            <option value="5">Day 5 - Disneyland with Steph</option>
-            <option value="6">Day 6 - Beach Day</option>
-            <option value="7">Day 7 - California Adventure</option>
-            <option value="8">Day 8 - Disneyland / Parade</option>
-            <option value="9">Day 9 - Great Wolf / Medieval Times</option>
-            <option value="10">Day 10 - Great Wolf Waterpark</option>
-            <option value="11">Day 11 - Drive to Redding</option>
-            <option value="12">Day 12 - Shasta Caverns</option>
-            <option value="13">Day 13 - Turtle Bay / Home</option>
-          </select>
-        </div>
-        <button type="submit" class="btn" id="upload-btn">Upload Memory</button>
-      </form>
+      <div class="form-group">
+        <label>Who's Uploading?</label>
+        <select id="upload-name">
+          <option value="">Select family member...</option>
+          <option value="Brandon">Brandon</option>
+          <option value="Racheal">Racheal</option>
+          <option value="Olivia">Olivia</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Which Day?</label>
+        <select id="upload-day">
+          <option value="">Select a day...</option>
+          <option value="1">Day 1 - San Jose / Sharks Game</option>
+          <option value="2">Day 2 - Drive to Disney</option>
+          <option value="3">Day 3 - Disneyland</option>
+          <option value="4">Day 4 - Pool Day</option>
+          <option value="5">Day 5 - Disneyland with Steph</option>
+          <option value="6">Day 6 - Beach Day</option>
+          <option value="7">Day 7 - California Adventure</option>
+          <option value="8">Day 8 - Disneyland / Parade</option>
+          <option value="9">Day 9 - Great Wolf / Medieval Times</option>
+          <option value="10">Day 10 - Great Wolf Waterpark</option>
+          <option value="11">Day 11 - Drive to Redding</option>
+          <option value="12">Day 12 - Shasta Caverns</option>
+          <option value="13">Day 13 - Turtle Bay / Home</option>
+        </select>
+      </div>
+      <button class="btn" id="upload-btn" onclick="openCloudinaryWidget()">📷 Choose Photo or Video</button>
+      <p style="color: var(--gray); font-size: 12px; margin-top: 15px; text-align: center;">Tap the button to select from your camera roll or take a new photo</p>
     </div>
   </div>
 
@@ -1266,6 +1253,9 @@
   <div class="toast" id="toast"></div>
 
   <script>
+    // API Configuration - Cloudflare Worker
+    const API_URL = 'https://donnelly-api.brandondonnelly33.workers.dev';
+
     // Create stars
     function createStars() {
       const container = document.getElementById('stars');
@@ -1317,57 +1307,52 @@
       document.getElementById(`modal-${type}`).classList.remove('active');
     }
 
-    // File preview
-    document.getElementById('file-input').addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file && file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          document.getElementById('preview-img').src = e.target.result;
-          document.getElementById('file-preview').style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-      }
-    });
+    // Cloudinary Upload Widget
+    function openCloudinaryWidget() {
+      const uploadedBy = document.getElementById('upload-name').value || 'Anonymous';
+      const dayNumber = document.getElementById('upload-day').value || '0';
 
-    // Upload form
-    document.getElementById('upload-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-
-      const file = document.getElementById('file-input').files[0];
-      if (!file) {
-        showToast('Please select a photo or video');
-        return;
-      }
-
-      const btn = document.getElementById('upload-btn');
-      btn.disabled = true;
-      btn.textContent = 'Uploading...';
-
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('uploaded_by', document.getElementById('upload-name').value || 'Anonymous');
-      formData.append('caption', document.getElementById('upload-caption').value);
-      formData.append('day_number', document.getElementById('upload-day').value);
-
-      try {
-        const res = await fetch('/api/photos', { method: 'POST', body: formData });
-        if (res.ok) {
-          showToast('Memory uploaded! 📸');
-          closeModal('upload');
-          document.getElementById('upload-form').reset();
-          document.getElementById('file-preview').style.display = 'none';
-          loadPhotos();
-        } else {
-          showToast('Upload failed - check Cloudinary setup');
+      const widget = cloudinary.createUploadWidget({
+        cloudName: 'dpazcxxyp',
+        uploadPreset: 'donnelly_unsigned',
+        sources: ['local', 'camera'],
+        multiple: true,
+        maxFiles: 10,
+        resourceType: 'auto',
+        tags: ['california2026'],
+        context: {
+          uploaded_by: uploadedBy,
+          day_number: dayNumber
+        },
+        styles: {
+          palette: {
+            window: '#0d2818',
+            windowBorder: '#efbf04',
+            tabIcon: '#efbf04',
+            menuIcons: '#adebb3',
+            textDark: '#0d2818',
+            textLight: '#e0e0e0',
+            link: '#efbf04',
+            action: '#efbf04',
+            inactiveTabIcon: '#888',
+            error: '#ff4444',
+            inProgress: '#efbf04',
+            complete: '#adebb3',
+            sourceBg: '#1a3d2a'
+          }
         }
-      } catch (err) {
-        showToast('Upload failed - check Cloudinary setup');
-      }
+      }, (error, result) => {
+        if (!error && result && result.event === 'success') {
+          showToast('Memory uploaded! 📸');
+          loadPhotos();
+        }
+        if (result && result.event === 'close') {
+          closeModal('upload');
+        }
+      });
 
-      btn.disabled = false;
-      btn.textContent = 'Upload Memory';
-    });
+      widget.open();
+    }
 
     // Journal form
     document.getElementById('journal-form').addEventListener('submit', async function(e) {
@@ -1380,7 +1365,7 @@
       }
 
       try {
-        const res = await fetch('/api/journal', {
+        const res = await fetch(`${API_URL}/api/journal`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -1401,12 +1386,12 @@
       }
     });
 
-    // Load photos
+    // Load photos from Cloudinary
     async function loadPhotos() {
       const container = document.getElementById('gallery-container');
 
       try {
-        const res = await fetch('/api/photos');
+        const res = await fetch(`${API_URL}/api/photos`);
         const photos = await res.json();
 
         if (photos.length === 0) {
@@ -1420,11 +1405,8 @@
         }
 
         container.innerHTML = photos.map(photo => `
-          <div class="gallery-item" onclick="openLightbox('${photo.url}', '${photo.caption || ''}')">
-            ${photo.type === 'video'
-              ? `<video src="${photo.url}" muted></video>`
-              : `<img src="${photo.url}" alt="${photo.caption || ''}">`
-            }
+          <div class="gallery-item" onclick="openLightbox('${photo.url}', '${photo.uploaded_by || ''}')">
+            <img src="${photo.url}" alt="${photo.uploaded_by || ''}">
           </div>
         `).join('');
       } catch (err) {
@@ -1432,12 +1414,12 @@
       }
     }
 
-    // Load journal
+    // Load journal from Cloudflare KV
     async function loadJournal() {
       const container = document.getElementById('journal-entries');
 
       try {
-        const res = await fetch('/api/journal');
+        const res = await fetch(`${API_URL}/api/journal`);
         const entries = await res.json();
 
         if (entries.length === 0) {
