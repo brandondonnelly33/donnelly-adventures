@@ -1,94 +1,140 @@
 # Donnelly Adventures - Project Reference
 
 ## Quick Links
-- **Live Site**: https://donnelly-adventures.onrender.com
-- **Custom Domain**: https://donnellyadventures.com (once SSL is ready)
+- **Live Site**: https://donnelly-adventures.pages.dev
+- **Custom Domain**: https://donnellyadventures.com (DNS configured on Namecheap)
 - **GitHub Repo**: https://github.com/brandondonnelly33/donnelly-adventures
+
+## Current Trip: California 2026
+- **Dates**: January 22 - February 4, 2026 (14 days)
+- **Family**: Brandon, Racheal, Olivia
+
+### Itinerary
+1. **Thu Jan 22** - Sacramento: Hyatt Regency, Lion King 7:30pm
+2. **Fri Jan 23** - Jelly Belly Factory morning, San Jose Sharks game 7pm
+3. **Sat Jan 24 - Sat Jan 31** - Disneyland Hotel (7 nights)
+4. **Sat Jan 31 - Mon Feb 2** - Great Wolf Lodge (2 nights), Medieval Times
+5. **Mon Feb 2 - Wed Feb 4** - Sheraton Redding Presidential Suite (2 nights)
+6. **Wed Feb 4** - Drive home to Sherwood, OR
+
+---
 
 ## How to Make Changes
 
-1. Tell me what you want changed
-2. I edit the files locally in `C:\Users\brand\Documents\claude-hq\donnelly-adventures\`
-3. I push to GitHub: `git add -A && git commit -m "message" && git push`
-4. Render auto-deploys in ~1 minute
+1. Tell Claude what you want changed
+2. Files are at `C:\Users\brand\Documents\claude-hq\donnelly-adventures\`
+3. Claude edits, commits, and deploys automatically
+4. Site updates in ~30 seconds
 
-That's it! You don't need to do anything.
+**Manual deploy command** (if needed):
+```bash
+cd C:\Users\brand\Documents\claude-hq\donnelly-adventures
+git add -A && git commit -m "your message" && git push
+npx wrangler pages deploy public --project-name donnelly-adventures
+```
 
-## Hosting: Render.com
+---
 
-- **Account**: Your GitHub login
-- **Dashboard**: https://dashboard.render.com
-- **Service Name**: donnelly-adventures
-- **Plan**: Free tier
-- **Auto-Deploy**: Yes (from GitHub main branch)
+## Hosting: Cloudflare Pages (FREE)
+
+- **Dashboard**: https://dash.cloudflare.com
+- **Account ID**: 5cb2fdc344ee4f912dafa445ec466409
+- **Project**: donnelly-adventures
+- **URL**: donnelly-adventures.pages.dev
+- **Features**: Instant loading, no cold starts, free forever
+
+### Cloudflare Worker API
+- **URL**: https://donnelly-api.brandondonnelly33.workers.dev
+- **Handles**: Photo listing from Cloudinary, journal entries
+- **KV Namespace ID**: 71806b9180c244de86b80cea80d01280 (for journal)
+
+---
 
 ## Domain: Namecheap
 
 - **Domain**: donnellyadventures.com
 - **Purchased**: 10 years ($148.10)
-- **DNS Settings** (already configured):
-  - A Record: `@` → `216.24.57.1`
-  - CNAME: `www` → `donnelly-adventures.onrender.com`
+- **DNS Settings**:
+  - CNAME `@` → `donnelly-adventures.pages.dev`
+  - CNAME `www` → `donnelly-adventures.pages.dev`
 
-## Photo Storage: Cloudinary
+---
+
+## Photo Storage: Cloudinary (FREE)
 
 - **Dashboard**: https://cloudinary.com/console
 - **Cloud Name**: dpazcxxyp
+- **API Key**: 772562965278268
+- **API Secret**: Dkzu63ARC_8E7I3KCA-krYrGaVE
+- **Upload Preset**: donnelly_unsigned
+- **Folder**: donnelly-adventures
 - **Free Tier**: 25GB storage (plenty for 1000+ photos)
-- **Credentials in**: `.env` file (don't share publicly)
+
+Photos upload directly from browser to Cloudinary - no server needed.
+
+---
 
 ## Project Structure
 
 ```
 donnelly-adventures/
-├── server.js          # Backend (Express.js)
-├── package.json       # Dependencies
-├── .env               # Cloudinary credentials (don't commit)
-├── data/
-│   └── donnelly.json  # Database (photos, journal entries)
-└── public/
-    ├── index.html          # Home page (adventure cards)
-    └── california-2026.html # California trip page
+├── public/
+│   ├── index.html              # Home page (adventure cards)
+│   └── california-2026.html    # California trip page
+├── worker/
+│   ├── worker.js               # Cloudflare Worker API
+│   └── wrangler.toml           # Worker config
+├── .env                        # Local Cloudinary creds (don't commit)
+├── package.json
+└── PROJECT-INFO.md             # This file
 ```
 
-## Family Members
-- Brandon
-- Racheal
-- Olivia
+---
 
 ## Adding New Trips
 
-To add a new adventure:
-1. Create a new HTML file in `public/` (e.g., `hawaii-2027.html`)
-2. Add an adventure card to `public/index.html`
-3. Push to GitHub
+1. Copy `public/california-2026.html` as template
+2. Rename to `public/new-trip-name.html`
+3. Edit the content
+4. Add card to `public/index.html`
+5. Deploy
 
-## If Something Breaks
+---
+
+## Troubleshooting
 
 **Site not loading?**
-- Check https://status.render.com
-- Render free tier sleeps after 15 min inactivity (first visit takes ~30 sec to wake)
+- Check https://www.cloudflarestatus.com
+- Run: `npx wrangler pages deploy public --project-name donnelly-adventures`
 
-**Custom domain not working?**
-- SSL certificates can take up to 24 hours
-- Check DNS propagation: https://dnschecker.org
+**Photos not showing?**
+- Check Cloudinary dashboard for storage
+- Test API: `curl https://donnelly-api.brandondonnelly33.workers.dev/api/photos`
 
-**Photos not uploading?**
-- Check Cloudinary dashboard for storage limits
-- Verify `.env` file has correct credentials
+**Custom domain issues?**
+- Check DNS: https://dnschecker.org
+- Verify CNAME points to `donnelly-adventures.pages.dev`
 
-**Need to redeploy manually?**
-- Go to Render dashboard → donnelly-adventures → Deploy → "Deploy latest commit"
+**Need to redeploy worker?**
+```bash
+cd C:\Users\brand\Documents\claude-hq\donnelly-adventures\worker
+npx wrangler deploy
+```
+
+---
 
 ## Credentials Summary
 
-| Service | Login |
-|---------|-------|
-| Render | GitHub OAuth |
-| GitHub | brandondonnelly33 |
-| Namecheap | Your account |
-| Cloudinary | Your account |
+| Service | Login | Notes |
+|---------|-------|-------|
+| Cloudflare | GitHub OAuth | Workers + Pages |
+| GitHub | brandondonnelly33 | Code repo |
+| Namecheap | Your account | Domain |
+| Cloudinary | Your account | Photo storage |
+
+---
 
 ## Created
-- **Date**: January 17, 2026
+- **Date**: January 17-19, 2026
 - **By**: Brandon + Claude (Atlas)
+- **Stack**: Static HTML + Cloudflare Pages + Cloudflare Workers + Cloudinary
