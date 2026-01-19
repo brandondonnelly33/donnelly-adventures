@@ -340,8 +340,9 @@
 
     .photo-grid img {
       width: 100%;
-      height: clamp(150px, 30vw, 280px);
+      height: clamp(120px, 25vw, 220px);
       object-fit: cover;
+      object-position: center top;
       transition: all 0.4s;
       cursor: pointer;
     }
@@ -776,12 +777,12 @@
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 8px;
     }
 
     .gallery-item {
-      aspect-ratio: 1;
+      aspect-ratio: 3/4;
       border-radius: 12px;
       overflow: hidden;
       cursor: pointer;
@@ -797,6 +798,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center center;
     }
 
     /* Lightbox */
