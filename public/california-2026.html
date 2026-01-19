@@ -409,6 +409,7 @@
     .cal-date { font-size: clamp(10px, 2.5vw, 12px); font-weight: 700; color: #fff; }
     .cal-label { font-size: clamp(8px, 2vw, 10px); color: rgba(255,255,255,0.7); text-transform: uppercase; }
 
+    .cal-day.sacramento { background: linear-gradient(135deg, #4a2600, #3d1f00); border: 2px solid #e67e22; }
     .cal-day.hockey { background: linear-gradient(135deg, #1a1a2e, #16213e); border: 2px solid #4a90a4; }
     .cal-day.disney { background: linear-gradient(135deg, #2d1f3d, #1a1a2e); border: 2px solid #9b59b6; }
     .cal-day.wolf { background: linear-gradient(135deg, #1e3a5f, #16213e); border: 2px solid #3498db; }
@@ -437,6 +438,7 @@
       border-radius: 4px;
     }
 
+    .sacramento-dot { background: #e67e22; }
     .hockey-dot { background: #4a90a4; }
     .disney-dot { background: #9b59b6; }
     .wolf-dot { background: #3498db; }
@@ -926,7 +928,7 @@
       <div class="hero-badge">The Ultimate Family Road Trip</div>
       <h1>California<br>Adventure 2026</h1>
       <div class="subtitle">The Donnelly Family</div>
-      <div class="dates">January 23 - February 4</div>
+      <div class="dates">January 22 - February 4</div>
 
       <div class="countdown">
         <div class="countdown-item">
@@ -953,19 +955,19 @@
   <!-- Stats Bar -->
   <div class="stats-bar">
     <div class="stat">
-      <div class="stat-num">13</div>
+      <div class="stat-num">14</div>
       <div class="stat-label">Days</div>
     </div>
     <div class="stat">
-      <div class="stat-num">12</div>
+      <div class="stat-num">13</div>
       <div class="stat-label">Nights</div>
     </div>
     <div class="stat">
-      <div class="stat-num">4</div>
+      <div class="stat-num">6</div>
       <div class="stat-label">Destinations</div>
     </div>
     <div class="stat">
-      <div class="stat-num">1,932</div>
+      <div class="stat-num">2,050</div>
       <div class="stat-label">Miles</div>
     </div>
   </div>
@@ -975,7 +977,11 @@
     <div style="background: rgba(239,191,4,0.1); border: 2px solid rgba(239,191,4,0.3); border-radius: 16px; padding: 25px; text-align: center;">
       <h3 style="color: var(--gold); margin-bottom: 15px; font-size: 18px;">🚗 The Route from Sherwood, OR</h3>
       <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; font-size: 14px;">
-        <span style="background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 20px; color: var(--white);">Sherwood → San Jose <strong style="color: var(--gold);">580 mi</strong></span>
+        <span style="background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 20px; color: var(--white);">Sherwood → Sacramento <strong style="color: var(--gold);">530 mi</strong></span>
+        <span style="color: var(--gold);">→</span>
+        <span style="background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 20px; color: var(--white);">Jelly Belly <strong style="color: var(--gold);">55 mi</strong></span>
+        <span style="color: var(--gold);">→</span>
+        <span style="background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 20px; color: var(--white);">San Jose <strong style="color: var(--gold);">60 mi</strong></span>
         <span style="color: var(--gold);">→</span>
         <span style="background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 20px; color: var(--white);">Anaheim <strong style="color: var(--gold);">366 mi</strong></span>
         <span style="color: var(--gold);">→</span>
@@ -992,11 +998,29 @@
   <section>
     <h2 class="section-title">🏨 Where We're Staying</h2>
 
+    <!-- Sacramento -->
+    <div class="destination">
+      <div class="destination-header">
+        <h3>🦁 Sacramento - Lion King Night <span class="badge badge-booked">✓ BOOKED</span></h3>
+        <div class="destination-dates">Thursday, Jan 22 • 1 Night • 530 miles from Sherwood</div>
+      </div>
+      <div class="photo-grid">
+        <img src="https://cdn.mytheatreland.com/images/show/03102_show_1279x840_03.jpg" alt="The Lion King Musical">
+        <img src="https://cdn-tp1.mozu.com/9046-m1/cms/files/3cf7d9f5-917c-4866-bd95-38f06ce67586?max=1920" alt="Jelly Belly Factory">
+      </div>
+      <div class="destination-content">
+        <p><span class="highlight">The Lion King @ SAFE Credit Union Performing Arts Center</span> - 7:30 PM<br>
+        Orchestra Section DD-EE, Row FF, Seats 1-15 🎭<br>
+        <span class="highlight">Hotel:</span> Hyatt Regency Sacramento, 1209 L Street (check-in 4pm)<br>
+        <span class="highlight">Friday Morning:</span> 🍬 <strong>Jelly Belly Factory Tour</strong> in Fairfield on the way to San Jose!</p>
+      </div>
+    </div>
+
     <!-- San Jose -->
     <div class="destination">
       <div class="destination-header">
         <h3>🦈 San Jose - Sharks Game Night <span class="badge badge-booked">✓ BOOKED</span></h3>
-        <div class="destination-dates">Friday, Jan 23 • 1 Night • 580 miles from Sherwood</div>
+        <div class="destination-dates">Friday, Jan 23 • 1 Night • 115 miles from Sacramento (via Jelly Belly)</div>
       </div>
       <div class="photo-grid">
         <img src="https://media.d3.nhle.com/image/private/t_ratio16_9-size40/dpr_2.0/f_png/v1732025093/prd/l8y3g90ap8awanthfuw3.png" alt="San Jose Sharks">
@@ -1004,7 +1028,7 @@
       </div>
       <div class="destination-content">
         <p><span class="highlight">Sharks vs Rangers @ SAP Center</span> - Section 127, Row 15, <strong>CLUB SEATS!</strong> 🔥<br>
-        Leave Sherwood at 6am, 9-hour drive, game at 7pm. Club seats include premium amenities and incredible views of the ice.</p>
+        Jelly Belly Factory Friday morning, then drive to San Jose for 7pm game. Club seats include premium amenities and incredible views of the ice.</p>
       </div>
     </div>
 
@@ -1077,7 +1101,8 @@
     <h2 class="section-title">📅 Our Adventure Calendar</h2>
 
     <div class="visual-calendar">
-      <div class="cal-day hockey"><div class="cal-icon">🏒</div><div class="cal-date">Jan 23</div><div class="cal-label">Fri</div></div>
+      <div class="cal-day sacramento"><div class="cal-icon">🦁</div><div class="cal-date">Jan 22</div><div class="cal-label">Thu</div></div>
+      <div class="cal-day hockey"><div class="cal-icon">🍬</div><div class="cal-date">Jan 23</div><div class="cal-label">Fri</div></div>
       <div class="cal-day disney"><div class="cal-icon">🚗</div><div class="cal-date">Jan 24</div><div class="cal-label">Sat</div></div>
       <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 25</div><div class="cal-label">Sun</div></div>
       <div class="cal-day disney"><div class="cal-icon">🏝️</div><div class="cal-date">Jan 26</div><div class="cal-label">Mon</div></div>
@@ -1093,6 +1118,7 @@
     </div>
 
     <div class="cal-legend">
+      <span class="cal-legend-item"><span class="legend-dot sacramento-dot"></span> Sacramento</span>
       <span class="cal-legend-item"><span class="legend-dot hockey-dot"></span> Hockey</span>
       <span class="cal-legend-item"><span class="legend-dot disney-dot"></span> Disney</span>
       <span class="cal-legend-item"><span class="legend-dot wolf-dot"></span> Great Wolf</span>
@@ -1105,8 +1131,9 @@
     <h2 class="section-title">✨ Trip Highlights</h2>
 
     <div class="highlights">
+      <div class="highlight-item"><span class="emoji">🦁</span><span class="text">The Lion King - Orchestra Seats!</span></div>
+      <div class="highlight-item"><span class="emoji">🍬</span><span class="text">Jelly Belly Factory Tour</span></div>
       <div class="highlight-item"><span class="emoji">🦈</span><span class="text">Sharks vs Rangers - CLUB SEATS!</span></div>
-      <div class="highlight-item"><span class="emoji">🍲</span><span class="text">Pea Soup Andersen's</span></div>
       <div class="highlight-item"><span class="emoji">🏰</span><span class="text">7 Nights Disneyland Hotel 1BR Suite</span></div>
       <div class="highlight-item"><span class="emoji">🎆</span><span class="text">Paint the Night Parade</span></div>
       <div class="highlight-item"><span class="emoji">🏖️</span><span class="text">Steph's Place - Huntington Beach</span></div>
@@ -1148,7 +1175,7 @@
     <div class="love">💚</div>
     <div class="trip-message" id="footer-message">6 DAYS UNTIL THE ADVENTURE!</div>
     <div class="sub-message">This is going to be AMAZING!</div>
-    <div style="color: var(--green-light); margin-top: 15px;">13 days of adventures together 💛</div>
+    <div style="color: var(--green-light); margin-top: 15px;">14 days of adventures together 💛</div>
   </div>
 
   <!-- Floating Action Buttons -->
@@ -1272,7 +1299,7 @@
 
     // Countdown
     function updateCountdown() {
-      const tripStart = new Date('2026-01-23T06:00:00');
+      const tripStart = new Date('2026-01-22T06:00:00');
       const now = new Date();
       const diff = tripStart - now;
 
