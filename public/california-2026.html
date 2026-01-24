@@ -782,16 +782,21 @@
     }
 
     .gallery-item {
-      aspect-ratio: 1;
       border-radius: 12px;
       overflow: hidden;
-      cursor: pointer;
       transition: all 0.3s;
+      background: rgba(0,0,0,0.3);
     }
 
     .gallery-item:hover {
-      transform: scale(1.05);
+      transform: scale(1.02);
       box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .gallery-item .photo-wrapper {
+      aspect-ratio: 1;
+      cursor: pointer;
+      overflow: hidden;
     }
 
     .gallery-item img, .gallery-item video {
@@ -799,6 +804,47 @@
       height: 100%;
       object-fit: cover;
       object-position: center center;
+    }
+
+    .gallery-item .photo-info {
+      padding: 10px 12px;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .gallery-item .photo-caption {
+      color: var(--white);
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .gallery-item .photo-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--gray);
+    }
+
+    .gallery-item .photo-author {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .gallery-item .delete-btn {
+      background: rgba(255,68,68,0.8);
+      border: none;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .gallery-item .delete-btn:hover {
+      background: #ff4444;
+      transform: scale(1.1);
     }
 
     /* Lightbox */
@@ -910,6 +956,69 @@
     .empty-state .icon { font-size: 64px; margin-bottom: 20px; }
     .empty-state p { font-size: 16px; }
 
+    /* Caption Items in batch modal */
+    .caption-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 15px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(173,235,179,0.2);
+    }
+
+    .caption-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .caption-item .caption-input-wrapper {
+      flex: 1;
+    }
+
+    .caption-item input {
+      width: 100%;
+      padding: 12px;
+      background: rgba(0,0,0,0.4);
+      border: 2px solid rgba(173,235,179,0.3);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .caption-item input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    /* Edit button on gallery items */
+    .gallery-item .photo-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .gallery-item .edit-btn {
+      background: rgba(239,191,4,0.8);
+      border: none;
+      color: var(--green-dark);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 600;
+    }
+
+    .gallery-item .edit-btn:hover {
+      background: var(--gold);
+      transform: scale(1.1);
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .photo-grid { grid-template-columns: 1fr; }
@@ -1006,7 +1115,7 @@
     <!-- Sacramento -->
     <div class="destination">
       <div class="destination-header">
-        <h3>🦁 Sacramento - Lion King Night <span class="badge badge-booked">✓ BOOKED</span></h3>
+        <h3>🦁 Sacramento - Lion King Night </h3>
         <div class="destination-dates">Thursday, Jan 22 • 1 Night • 530 miles from Sherwood</div>
       </div>
       <div class="photo-grid">
@@ -1024,7 +1133,7 @@
     <!-- San Jose -->
     <div class="destination">
       <div class="destination-header">
-        <h3>🦈 San Jose - Sharks Game Night <span class="badge badge-booked">✓ BOOKED</span></h3>
+        <h3>🦈 San Jose - Sharks Game Night </h3>
         <div class="destination-dates">Friday, Jan 23 • 1 Night • 115 miles from Sacramento (via Jelly Belly)</div>
       </div>
       <div class="photo-grid">
@@ -1040,7 +1149,7 @@
     <!-- Disneyland -->
     <div class="destination">
       <div class="destination-header">
-        <h3>🏰 Disneyland Hotel - 1 Bedroom Suite <span class="badge badge-booked">✓ BOOKED</span> <span class="badge badge-fire">🔥 7 NIGHTS</span></h3>
+        <h3>🏰 Disneyland Hotel - 1 Bedroom Suite  <span class="badge badge-fire">🔥 7 NIGHTS</span></h3>
         <div class="destination-dates">Saturday, Jan 24 - Saturday, Jan 31 • 366 miles from San Jose</div>
       </div>
       <div class="photo-grid">
@@ -1052,16 +1161,23 @@
         <img src="https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/big-thunder-mountain-railroad/big-thunder-mountain-railroad-00.jpg?1765208789463" alt="Big Thunder Mountain">
       </div>
       <div class="destination-content">
-        <p><span class="highlight">4 Park Days:</span> Disneyland (Sun, Tue, Fri) + California Adventure (Thu)<br>
-        <span class="highlight">Must-Do:</span> Cars Land, Avengers Campus, World of Color, 🎆 <strong>Paint the Night Parade!</strong><br>
-        <span class="highlight">Rest Days:</span> Pool, Downtown Disney, 🏖️ Huntington Beach sunset at Steph's Place!</p>
+        <p><span class="highlight">Schedule:</span><br>
+        • <strong>Sat 1/24:</strong> Arrive & settle in<br>
+        • <strong>Sun 1/25:</strong> Rest day / Pool<br>
+        • <strong>Mon 1/26:</strong> 🏰 Park Day<br>
+        • <strong>Tue 1/27:</strong> 🏖️ Cabana Day<br>
+        • <strong>Wed 1/28:</strong> 🏰 Disney Day with Steph<br>
+        • <strong>Thu 1/29:</strong> 🏠 Steph's House<br>
+        • <strong>Fri 1/30:</strong> 🏰 Park Day<br>
+        • <strong>Sat 1/31:</strong> 🏰 Park Day → Great Wolf<br><br>
+        <span class="highlight">Must-Do:</span> Cars Land, Avengers Campus, World of Color, 🎆 <strong>Paint the Night Parade!</strong></p>
       </div>
     </div>
 
     <!-- Great Wolf Lodge -->
     <div class="destination">
       <div class="destination-header">
-        <h3>🌊 Great Wolf Lodge SoCal <span class="badge badge-booked">✓ BOOKED</span></h3>
+        <h3>🌊 Great Wolf Lodge SoCal </h3>
         <div class="destination-dates">Saturday, Jan 31 - Monday, Feb 2 • 2 Nights • 3 miles from Disney</div>
       </div>
       <div class="photo-grid">
@@ -1070,18 +1186,19 @@
       </div>
       <div class="photo-grid">
         <img src="https://californiathroughmylens.com/wp-content/uploads/2017/01/medieval-times-13.jpg" alt="Medieval Times">
-        <img src="https://www.greatwolf.com/content/dam/greatwolf/sites/www/things-to-do/attractions/build-a-bear/md-bab-workshop-2.jpg" alt="Build-A-Bear Workshop">
+        <img src="https://ewscripps.brightspotcdn.com/dims4/default/0cf666b/2147483647/strip/true/crop/3618x2035+0+188/resize/1280x720!/quality/90/?url=http%3A%2F%2Fewscripps-brightspot.s3.amazonaws.com%2F86%2F65%2Fee82cb744b06b5f0e3e4901f20d1%2Fap24110134853676.jpg" alt="Anaheim Ducks Hockey">
       </div>
       <div class="destination-content">
         <p><span class="highlight">Full waterpark access!</span> 105,000 sq ft indoor waterpark - slides, wave pool, lazy river, MagiQuest!<br>
-        <span class="highlight">Saturday night:</span> ⚔️ <strong>Medieval Times 7:30pm</strong> - Celebration Upgrade + Glow Sword!</p>
+        <span class="highlight">Saturday night:</span> ⚔️ <strong>Medieval Times 7:30pm</strong> - Celebration Upgrade + Glow Sword!<br>
+        <span class="highlight">Sunday 2/1:</span> 🏒 <strong>Anaheim Ducks @ Honda Center 6:30pm</strong> - Section 307, INSANE seats!</p>
       </div>
     </div>
 
     <!-- Sheraton Redding -->
     <div class="destination">
       <div class="destination-header">
-        <h3>🏨 Sheraton Redding - Presidential Suite <span class="badge badge-booked">✓ BOOKED</span> <span class="badge badge-fire">🔥 PRESIDENTIAL</span></h3>
+        <h3>🏨 Sheraton Redding - Presidential Suite  <span class="badge badge-fire">🔥 PRESIDENTIAL</span></h3>
         <div class="destination-dates">Monday, Feb 2 - Wednesday, Feb 4 • 2 Nights • 573 miles from Great Wolf</div>
       </div>
       <div class="photo-grid">
@@ -1108,15 +1225,15 @@
     <div class="visual-calendar">
       <div class="cal-day sacramento"><div class="cal-icon">🦁</div><div class="cal-date">Jan 22</div><div class="cal-label">Thu</div></div>
       <div class="cal-day hockey"><div class="cal-icon">🍬</div><div class="cal-date">Jan 23</div><div class="cal-label">Fri</div></div>
-      <div class="cal-day disney"><div class="cal-icon">🚗</div><div class="cal-date">Jan 24</div><div class="cal-label">Sat</div></div>
-      <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 25</div><div class="cal-label">Sun</div></div>
-      <div class="cal-day disney"><div class="cal-icon">🏝️</div><div class="cal-date">Jan 26</div><div class="cal-label">Mon</div></div>
-      <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 27</div><div class="cal-label">Tue</div></div>
-      <div class="cal-day disney"><div class="cal-icon">🏖️</div><div class="cal-date">Jan 28</div><div class="cal-label">Wed</div></div>
-      <div class="cal-day disney"><div class="cal-icon">🎢</div><div class="cal-date">Jan 29</div><div class="cal-label">Thu</div></div>
-      <div class="cal-day disney"><div class="cal-icon">🎆</div><div class="cal-date">Jan 30</div><div class="cal-label">Fri</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🛬</div><div class="cal-date">Jan 24</div><div class="cal-label">Sat</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏊</div><div class="cal-date">Jan 25</div><div class="cal-label">Sun</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 26</div><div class="cal-label">Mon</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏖️</div><div class="cal-date">Jan 27</div><div class="cal-label">Tue</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 28</div><div class="cal-label">Wed</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏠</div><div class="cal-date">Jan 29</div><div class="cal-label">Thu</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 30</div><div class="cal-label">Fri</div></div>
       <div class="cal-day wolf"><div class="cal-icon">⚔️</div><div class="cal-date">Jan 31</div><div class="cal-label">Sat</div></div>
-      <div class="cal-day wolf"><div class="cal-icon">🌊</div><div class="cal-date">Feb 1</div><div class="cal-label">Sun</div></div>
+      <div class="cal-day wolf"><div class="cal-icon">🏒</div><div class="cal-date">Feb 1</div><div class="cal-label">Sun</div></div>
       <div class="cal-day redding"><div class="cal-icon">🌉</div><div class="cal-date">Feb 2</div><div class="cal-label">Mon</div></div>
       <div class="cal-day redding"><div class="cal-icon">🚤</div><div class="cal-date">Feb 3</div><div class="cal-label">Tue</div></div>
       <div class="cal-day home"><div class="cal-icon">🏠</div><div class="cal-date">Feb 4</div><div class="cal-label">Wed</div></div>
@@ -1144,6 +1261,7 @@
       <div class="highlight-item"><span class="emoji">🏖️</span><span class="text">Steph's Place - Huntington Beach</span></div>
       <div class="highlight-item"><span class="emoji">⚔️</span><span class="text">Medieval Times - Celebration + Glow Sword</span></div>
       <div class="highlight-item"><span class="emoji">🌊</span><span class="text">2 Nights Great Wolf Lodge</span></div>
+      <div class="highlight-item"><span class="emoji">🏒</span><span class="text">Anaheim Ducks - Section 307!</span></div>
       <div class="highlight-item"><span class="emoji">🌉</span><span class="text">Sundial Bridge</span></div>
       <div class="highlight-item"><span class="emoji">🚤</span><span class="text">Shasta Caverns (Boat + Cave)</span></div>
       <div class="highlight-item"><span class="emoji">🐢</span><span class="text">Turtle Bay Exploration Park</span></div>
@@ -1209,23 +1327,61 @@
         <label>Which Day?</label>
         <select id="upload-day">
           <option value="">Select a day...</option>
-          <option value="1">Day 1 - San Jose / Sharks Game</option>
-          <option value="2">Day 2 - Drive to Disney</option>
-          <option value="3">Day 3 - Disneyland</option>
-          <option value="4">Day 4 - Pool Day</option>
-          <option value="5">Day 5 - Disneyland with Steph</option>
-          <option value="6">Day 6 - Beach Day</option>
-          <option value="7">Day 7 - California Adventure</option>
-          <option value="8">Day 8 - Disneyland / Parade</option>
-          <option value="9">Day 9 - Great Wolf / Medieval Times</option>
-          <option value="10">Day 10 - Great Wolf Waterpark</option>
-          <option value="11">Day 11 - Drive to Redding</option>
-          <option value="12">Day 12 - Shasta Caverns</option>
-          <option value="13">Day 13 - Turtle Bay / Home</option>
+          <option value="1">Day 1 - Sacramento / Lion King</option>
+          <option value="2">Day 2 - Jelly Belly / Sharks Game</option>
+          <option value="3">Day 3 - Drive to Disney / Arrive</option>
+          <option value="4">Day 4 - Rest / Pool Day</option>
+          <option value="5">Day 5 - Disneyland</option>
+          <option value="6">Day 6 - Cabana Day</option>
+          <option value="7">Day 7 - Disney with Steph</option>
+          <option value="8">Day 8 - Steph's House</option>
+          <option value="9">Day 9 - Disneyland</option>
+          <option value="10">Day 10 - Disney → Great Wolf / Medieval Times</option>
+          <option value="11">Day 11 - Great Wolf / Ducks Game</option>
+          <option value="12">Day 12 - Drive to Redding</option>
+          <option value="13">Day 13 - Shasta Caverns</option>
+          <option value="14">Day 14 - Turtle Bay / Home</option>
         </select>
       </div>
-      <button class="btn" id="upload-btn" onclick="openCloudinaryWidget()">📷 Choose Photo or Video</button>
-      <p style="color: var(--gray); font-size: 12px; margin-top: 15px; text-align: center;">Tap the button to select from your camera roll or take a new photo</p>
+      <button class="btn" id="upload-btn" onclick="openCloudinaryWidget()">📷 Choose Photos or Videos</button>
+      <p style="color: var(--gray); font-size: 12px; margin-top: 15px; text-align: center;">Select multiple photos - you can add captions to each one after uploading!</p>
+    </div>
+  </div>
+
+  <!-- Caption Photos Modal (appears after batch upload) -->
+  <div class="modal" id="modal-captions">
+    <div class="modal-content" style="max-width: 600px; max-height: 90vh;">
+      <div class="modal-header">
+        <h2>✏️ Add Captions</h2>
+        <button class="modal-close" onclick="closeCaptionModal()">&times;</button>
+      </div>
+      <p style="color: var(--gray); margin-bottom: 20px;">Add a caption to each photo (optional)</p>
+      <div id="caption-photos-list" style="max-height: 50vh; overflow-y: auto; margin-bottom: 20px;">
+        <!-- Photos will be inserted here -->
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn" onclick="saveCaptions()" style="flex: 1;">💾 Save Captions</button>
+        <button class="btn" onclick="closeCaptionModal()" style="flex: 1; background: linear-gradient(135deg, #666, #888);">Skip</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Single Photo Modal -->
+  <div class="modal" id="modal-edit-photo">
+    <div class="modal-content" style="max-width: 450px;">
+      <div class="modal-header">
+        <h2>✏️ Edit Caption</h2>
+        <button class="modal-close" onclick="closeModal('edit-photo')">&times;</button>
+      </div>
+      <div id="edit-photo-preview" style="margin-bottom: 20px; text-align: center;">
+        <img id="edit-photo-img" src="" style="max-width: 100%; max-height: 200px; border-radius: 12px;">
+      </div>
+      <input type="hidden" id="edit-photo-id">
+      <div class="form-group">
+        <label>Caption</label>
+        <input type="text" id="edit-photo-caption" placeholder="Add a caption...">
+      </div>
+      <button class="btn" onclick="savePhotoEdit()">💾 Save</button>
     </div>
   </div>
 
@@ -1250,19 +1406,20 @@
           <label>Which Day?</label>
           <select id="journal-day">
             <option value="">General / No specific day</option>
-            <option value="1">Day 1 - San Jose</option>
-            <option value="2">Day 2 - Drive to Disney</option>
-            <option value="3">Day 3 - Disneyland</option>
-            <option value="4">Day 4 - Pool Day</option>
-            <option value="5">Day 5 - Disneyland with Steph</option>
-            <option value="6">Day 6 - Beach Day</option>
-            <option value="7">Day 7 - California Adventure</option>
-            <option value="8">Day 8 - Disneyland / Parade</option>
-            <option value="9">Day 9 - Great Wolf / Medieval Times</option>
-            <option value="10">Day 10 - Great Wolf Waterpark</option>
-            <option value="11">Day 11 - Drive to Redding</option>
-            <option value="12">Day 12 - Shasta Caverns</option>
-            <option value="13">Day 13 - Turtle Bay / Home</option>
+            <option value="1">Day 1 - Sacramento / Lion King</option>
+            <option value="2">Day 2 - Jelly Belly / Sharks Game</option>
+            <option value="3">Day 3 - Drive to Disney / Arrive</option>
+            <option value="4">Day 4 - Rest / Pool Day</option>
+            <option value="5">Day 5 - Disneyland</option>
+            <option value="6">Day 6 - Cabana Day</option>
+            <option value="7">Day 7 - Disney with Steph</option>
+            <option value="8">Day 8 - Steph's House</option>
+            <option value="9">Day 9 - Disneyland</option>
+            <option value="10">Day 10 - Disney → Great Wolf / Medieval Times</option>
+            <option value="11">Day 11 - Great Wolf / Ducks Game</option>
+            <option value="12">Day 12 - Drive to Redding</option>
+            <option value="13">Day 13 - Shasta Caverns</option>
+            <option value="14">Day 14 - Turtle Bay / Home</option>
           </select>
         </div>
         <div class="form-group">
@@ -1339,17 +1496,23 @@
       document.getElementById(`modal-${type}`).classList.remove('active');
     }
 
+    // Track uploaded photos for batch captioning
+    let pendingUploads = [];
+
     // Cloudinary Upload Widget
     function openCloudinaryWidget() {
       const uploadedBy = document.getElementById('upload-name').value || 'Anonymous';
       const dayNumber = document.getElementById('upload-day').value || '0';
+
+      // Reset pending uploads
+      pendingUploads = [];
 
       const widget = cloudinary.createUploadWidget({
         cloudName: 'dpazcxxyp',
         uploadPreset: 'donnelly_unsigned',
         sources: ['local', 'camera'],
         multiple: true,
-        maxFiles: 10,
+        maxFiles: 20,
         resourceType: 'auto',
         tags: ['california2026'],
         context: {
@@ -1375,15 +1538,136 @@
         }
       }, (error, result) => {
         if (!error && result && result.event === 'success') {
-          showToast('Memory uploaded! 📸');
-          loadPhotos();
+          // Track each successful upload
+          pendingUploads.push({
+            public_id: result.info.public_id,
+            url: result.info.secure_url,
+            uploaded_by: uploadedBy,
+            day_number: dayNumber
+          });
         }
         if (result && result.event === 'close') {
           closeModal('upload');
+          // If we have uploads, show the caption modal
+          if (pendingUploads.length > 0) {
+            showCaptionModal();
+          }
         }
       });
 
       widget.open();
+    }
+
+    // Show caption modal after batch upload
+    function showCaptionModal() {
+      const container = document.getElementById('caption-photos-list');
+      container.innerHTML = pendingUploads.map((photo, index) => `
+        <div class="caption-item" data-id="${photo.public_id}">
+          <img src="${photo.url}" alt="Uploaded photo">
+          <div class="caption-input-wrapper">
+            <input type="text"
+                   id="caption-input-${index}"
+                   placeholder="Add a caption for this photo..."
+                   data-public-id="${photo.public_id}"
+                   data-uploaded-by="${photo.uploaded_by}"
+                   data-day-number="${photo.day_number}">
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('modal-captions').classList.add('active');
+    }
+
+    // Close caption modal
+    function closeCaptionModal() {
+      document.getElementById('modal-captions').classList.remove('active');
+      pendingUploads = [];
+      loadPhotos();
+    }
+
+    // Save all captions from batch upload
+    async function saveCaptions() {
+      const inputs = document.querySelectorAll('#caption-photos-list input');
+      let saved = 0;
+
+      for (const input of inputs) {
+        const caption = input.value.trim();
+        if (caption) {
+          const publicId = input.dataset.publicId;
+          const uploadedBy = input.dataset.uploadedBy;
+          const dayNumber = input.dataset.dayNumber;
+
+          try {
+            await fetch(`${API_URL}/api/photos/${encodeURIComponent(publicId)}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                caption: caption,
+                uploaded_by: uploadedBy,
+                day_number: dayNumber
+              })
+            });
+            saved++;
+          } catch (err) {
+            console.error('Failed to save caption:', err);
+          }
+        }
+      }
+
+      showToast(`${saved > 0 ? saved + ' caption' + (saved > 1 ? 's' : '') + ' saved!' : 'Photos uploaded!'} 📸`);
+      closeCaptionModal();
+    }
+
+    // Edit single photo caption
+    function openEditPhoto(publicId, url, caption) {
+      document.getElementById('edit-photo-id').value = publicId;
+      document.getElementById('edit-photo-img').src = url;
+      document.getElementById('edit-photo-caption').value = caption || '';
+      document.getElementById('modal-edit-photo').classList.add('active');
+    }
+
+    // Save single photo edit
+    async function savePhotoEdit() {
+      const publicId = document.getElementById('edit-photo-id').value;
+      const caption = document.getElementById('edit-photo-caption').value.trim();
+
+      try {
+        const res = await fetch(`${API_URL}/api/photos/${encodeURIComponent(publicId)}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ caption: caption })
+        });
+
+        if (res.ok) {
+          showToast('Caption updated! ✏️');
+          closeModal('edit-photo');
+          loadPhotos();
+        } else {
+          showToast('Failed to update');
+        }
+      } catch (err) {
+        showToast('Failed to update');
+      }
+    }
+
+    // Delete photo
+    async function deletePhoto(publicId) {
+      if (!confirm('Delete this photo?')) return;
+
+      try {
+        const res = await fetch(`${API_URL}/api/photos/${encodeURIComponent(publicId)}`, {
+          method: 'DELETE'
+        });
+
+        if (res.ok) {
+          showToast('Photo deleted');
+          loadPhotos();
+        } else {
+          showToast('Failed to delete');
+        }
+      } catch (err) {
+        showToast('Failed to delete');
+      }
     }
 
     // Journal form
@@ -1436,11 +1720,25 @@
           return;
         }
 
-        container.innerHTML = photos.map(photo => `
-          <div class="gallery-item" onclick="openLightbox('${photo.url}', '${photo.uploaded_by || ''}')">
-            <img src="${photo.url}" alt="${photo.uploaded_by || ''}">
+        container.innerHTML = photos.map(photo => {
+          const safeCaption = (photo.caption || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+          return `
+          <div class="gallery-item" data-id="${photo.public_id}">
+            <div class="photo-wrapper" onclick="openLightbox('${photo.url}', '${safeCaption}')">
+              <img src="${photo.url}" alt="${photo.caption || ''}">
+            </div>
+            <div class="photo-info">
+              ${photo.caption ? `<div class="photo-caption">${photo.caption}</div>` : '<div class="photo-caption" style="color: var(--gray); font-style: italic;">No caption</div>'}
+              <div class="photo-meta">
+                <span class="photo-author">${photo.uploaded_by || 'Anonymous'}${photo.day_number && photo.day_number !== '0' ? ` • Day ${photo.day_number}` : ''}</span>
+                <div class="photo-actions">
+                  <button class="edit-btn" onclick="event.stopPropagation(); openEditPhoto('${photo.public_id}', '${photo.url}', '${safeCaption}')">Edit</button>
+                  <button class="delete-btn" onclick="event.stopPropagation(); deletePhoto('${photo.public_id}')">Delete</button>
+                </div>
+              </div>
+            </div>
           </div>
-        `).join('');
+        `}).join('');
       } catch (err) {
         container.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;"><div class="icon">📷</div><p>Upload photos during the trip!</p></div>';
       }
