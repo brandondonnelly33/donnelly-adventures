@@ -1019,6 +1019,117 @@
       transform: scale(1.1);
     }
 
+    /* Tab Navigation */
+    .tab-nav {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      background: rgba(13,40,24,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid rgba(239,191,4,0.3);
+      padding: 0;
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .tab-nav::-webkit-scrollbar { display: none; }
+
+    .tab-link {
+      flex-shrink: 0;
+      padding: 14px 20px;
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+
+    .tab-link:hover, .tab-link.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* Section photo galleries */
+    .section-gallery {
+      margin-top: 20px;
+      padding: 20px 30px 25px;
+      border-top: 1px solid rgba(173,235,179,0.15);
+    }
+
+    .section-gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .section-gallery-header h4 {
+      color: var(--gold);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-gallery-header .photo-count {
+      color: var(--gray);
+      font-size: 12px;
+    }
+
+    .section-gallery .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+
+    .section-gallery .empty-state {
+      padding: 30px 20px;
+    }
+
+    .section-gallery .empty-state .icon { font-size: 36px; margin-bottom: 10px; }
+    .section-gallery .empty-state p { font-size: 13px; }
+
+    /* Lightbox navigation */
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(239,191,4,0.8);
+      color: var(--green-dark);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+    }
+
+    .lightbox-nav:hover {
+      background: var(--gold);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+
+    .lightbox-counter {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .photo-grid { grid-template-columns: 1fr; }
@@ -1027,6 +1138,10 @@
       .gallery-item { aspect-ratio: 3/4; }
       .floating-actions { bottom: 20px; right: 20px; }
       .fab { width: 50px; height: 50px; font-size: 20px; }
+      .tab-link { padding: 12px 15px; font-size: 11px; }
+      .lightbox-nav { width: 40px; height: 40px; font-size: 18px; }
+      .lightbox-prev { left: 10px; }
+      .lightbox-next { right: 10px; }
     }
   </style>
 </head>
@@ -1086,8 +1201,21 @@
     </div>
   </div>
 
+  <!-- Tab Navigation -->
+  <nav class="tab-nav" id="tab-nav">
+    <a href="#route" class="tab-link">Route</a>
+    <a href="#sacramento" class="tab-link">Sacramento</a>
+    <a href="#sanjose" class="tab-link">San Jose</a>
+    <a href="#disney" class="tab-link">Disney</a>
+    <a href="#greatwolf" class="tab-link">Great Wolf</a>
+    <a href="#redding" class="tab-link">Redding</a>
+    <a href="#calendar" class="tab-link">Calendar</a>
+    <a href="#highlights" class="tab-link">Highlights</a>
+    <a href="#journal" class="tab-link">Journal</a>
+  </nav>
+
   <!-- Route Overview -->
-  <section style="padding-top: 40px; padding-bottom: 20px;">
+  <section id="route" style="padding-top: 40px; padding-bottom: 20px;">
     <div style="background: rgba(239,191,4,0.1); border: 2px solid rgba(239,191,4,0.3); border-radius: 16px; padding: 25px; text-align: center;">
       <h3 style="color: var(--gold); margin-bottom: 15px; font-size: 18px;">🚗 The Route from Sherwood, OR</h3>
       <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; font-size: 14px;">
@@ -1113,7 +1241,7 @@
     <h2 class="section-title">🏨 Where We're Staying</h2>
 
     <!-- Sacramento -->
-    <div class="destination">
+    <div class="destination" id="sacramento">
       <div class="destination-header">
         <h3>🦁 Sacramento - Lion King Night </h3>
         <div class="destination-dates">Thursday, Jan 22 • 1 Night • 530 miles from Sherwood</div>
@@ -1128,10 +1256,17 @@
         <span class="highlight">Hotel:</span> Hyatt Regency Sacramento, 1209 L Street (check-in 4pm)<br>
         <span class="highlight">Friday Morning:</span> 🍬 <strong>Jelly Belly Factory Tour</strong> in Fairfield on the way to San Jose!</p>
       </div>
+      <div class="section-gallery" data-section="sacramento">
+        <div class="section-gallery-header">
+          <h4>Photos</h4>
+          <span class="photo-count"></span>
+        </div>
+        <div class="gallery-grid" id="gallery-sacramento"></div>
+      </div>
     </div>
 
     <!-- San Jose -->
-    <div class="destination">
+    <div class="destination" id="sanjose">
       <div class="destination-header">
         <h3>🦈 San Jose - Sharks Game Night </h3>
         <div class="destination-dates">Friday, Jan 23 • 1 Night • 115 miles from Sacramento (via Jelly Belly)</div>
@@ -1144,10 +1279,17 @@
         <p><span class="highlight">Sharks vs Rangers @ SAP Center</span> - Section 127, Row 15, <strong>CLUB SEATS!</strong> 🔥<br>
         Jelly Belly Factory Friday morning, then drive to San Jose for 7pm game. Club seats include premium amenities and incredible views of the ice.</p>
       </div>
+      <div class="section-gallery" data-section="sanjose">
+        <div class="section-gallery-header">
+          <h4>Photos</h4>
+          <span class="photo-count"></span>
+        </div>
+        <div class="gallery-grid" id="gallery-sanjose"></div>
+      </div>
     </div>
 
     <!-- Disneyland -->
-    <div class="destination">
+    <div class="destination" id="disney">
       <div class="destination-header">
         <h3>🏰 Disneyland Hotel - 1 Bedroom Suite  <span class="badge badge-fire">🔥 7 NIGHTS</span></h3>
         <div class="destination-dates">Saturday, Jan 24 - Saturday, Jan 31 • 366 miles from San Jose</div>
@@ -1163,19 +1305,26 @@
       <div class="destination-content">
         <p><span class="highlight">Schedule:</span><br>
         • <strong>Sat 1/24:</strong> Arrive & settle in<br>
-        • <strong>Sun 1/25:</strong> Rest day / Pool<br>
-        • <strong>Mon 1/26:</strong> 🏰 Park Day<br>
-        • <strong>Tue 1/27:</strong> 🏖️ Cabana Day<br>
-        • <strong>Wed 1/28:</strong> 🏰 Disney Day with Steph<br>
-        • <strong>Thu 1/29:</strong> 🏠 Steph's House<br>
+        • <strong>Sun 1/25:</strong> 🏰 Park Day<br>
+        • <strong>Mon 1/26:</strong> 🏖️ Cabana Day<br>
+        • <strong>Tue 1/27:</strong> 🏰 Park Day<br>
+        • <strong>Wed 1/28:</strong> 🏠 Steph's<br>
+        • <strong>Thu 1/29:</strong> 🏰 Park Day<br>
         • <strong>Fri 1/30:</strong> 🏰 Park Day<br>
-        • <strong>Sat 1/31:</strong> 🏰 Park Day → Great Wolf<br><br>
+        • <strong>Sat 1/31:</strong> → Great Wolf Lodge<br><br>
         <span class="highlight">Must-Do:</span> Cars Land, Avengers Campus, World of Color, 🎆 <strong>Paint the Night Parade!</strong></p>
+      </div>
+      <div class="section-gallery" data-section="disney">
+        <div class="section-gallery-header">
+          <h4>Photos</h4>
+          <span class="photo-count"></span>
+        </div>
+        <div class="gallery-grid" id="gallery-disney"></div>
       </div>
     </div>
 
     <!-- Great Wolf Lodge -->
-    <div class="destination">
+    <div class="destination" id="greatwolf">
       <div class="destination-header">
         <h3>🌊 Great Wolf Lodge SoCal </h3>
         <div class="destination-dates">Saturday, Jan 31 - Monday, Feb 2 • 2 Nights • 3 miles from Disney</div>
@@ -1193,10 +1342,17 @@
         <span class="highlight">Saturday night:</span> ⚔️ <strong>Medieval Times 7:30pm</strong> - Celebration Upgrade + Glow Sword!<br>
         <span class="highlight">Sunday 2/1:</span> 🏒 <strong>Anaheim Ducks @ Honda Center 6:30pm</strong> - Section 307, INSANE seats!</p>
       </div>
+      <div class="section-gallery" data-section="greatwolf">
+        <div class="section-gallery-header">
+          <h4>Photos</h4>
+          <span class="photo-count"></span>
+        </div>
+        <div class="gallery-grid" id="gallery-greatwolf"></div>
+      </div>
     </div>
 
     <!-- Sheraton Redding -->
-    <div class="destination">
+    <div class="destination" id="redding">
       <div class="destination-header">
         <h3>🏨 Sheraton Redding - Presidential Suite  <span class="badge badge-fire">🔥 PRESIDENTIAL</span></h3>
         <div class="destination-dates">Monday, Feb 2 - Wednesday, Feb 4 • 2 Nights • 573 miles from Great Wolf</div>
@@ -1215,22 +1371,29 @@
         <span class="highlight">Adventures:</span> 🌉 Sundial Bridge evening walk, 🚤 Shasta Caverns 12pm Tue, 🐢 Turtle Bay 9am Wed<br>
         <span class="highlight">Home:</span> 410 miles back to Sherwood!</p>
       </div>
+      <div class="section-gallery" data-section="redding">
+        <div class="section-gallery-header">
+          <h4>Photos</h4>
+          <span class="photo-count"></span>
+        </div>
+        <div class="gallery-grid" id="gallery-redding"></div>
+      </div>
     </div>
   </section>
 
   <!-- Visual Calendar -->
   <section>
-    <h2 class="section-title">📅 Our Adventure Calendar</h2>
+    <h2 class="section-title" id="calendar">📅 Our Adventure Calendar</h2>
 
     <div class="visual-calendar">
       <div class="cal-day sacramento"><div class="cal-icon">🦁</div><div class="cal-date">Jan 22</div><div class="cal-label">Thu</div></div>
       <div class="cal-day hockey"><div class="cal-icon">🍬</div><div class="cal-date">Jan 23</div><div class="cal-label">Fri</div></div>
       <div class="cal-day disney"><div class="cal-icon">🛬</div><div class="cal-date">Jan 24</div><div class="cal-label">Sat</div></div>
-      <div class="cal-day disney"><div class="cal-icon">🏊</div><div class="cal-date">Jan 25</div><div class="cal-label">Sun</div></div>
-      <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 26</div><div class="cal-label">Mon</div></div>
-      <div class="cal-day disney"><div class="cal-icon">🏖️</div><div class="cal-date">Jan 27</div><div class="cal-label">Tue</div></div>
-      <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 28</div><div class="cal-label">Wed</div></div>
-      <div class="cal-day disney"><div class="cal-icon">🏠</div><div class="cal-date">Jan 29</div><div class="cal-label">Thu</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 25</div><div class="cal-label">Sun</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏖️</div><div class="cal-date">Jan 26</div><div class="cal-label">Mon</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 27</div><div class="cal-label">Tue</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏠</div><div class="cal-date">Jan 28</div><div class="cal-label">Wed</div></div>
+      <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 29</div><div class="cal-label">Thu</div></div>
       <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 30</div><div class="cal-label">Fri</div></div>
       <div class="cal-day wolf"><div class="cal-icon">⚔️</div><div class="cal-date">Jan 31</div><div class="cal-label">Sat</div></div>
       <div class="cal-day wolf"><div class="cal-icon">🏒</div><div class="cal-date">Feb 1</div><div class="cal-label">Sun</div></div>
@@ -1250,7 +1413,7 @@
 
   <!-- Trip Highlights -->
   <section>
-    <h2 class="section-title">✨ Trip Highlights</h2>
+    <h2 class="section-title" id="highlights">✨ Trip Highlights</h2>
 
     <div class="highlights">
       <div class="highlight-item"><span class="emoji">🦁</span><span class="text">The Lion King - Orchestra Seats!</span></div>
@@ -1270,21 +1433,9 @@
     </div>
   </section>
 
-  <!-- Family Memories -->
-  <section>
-    <h2 class="section-title">📸 Family Memories</h2>
-    <p style="color: var(--gray); margin-bottom: 20px;">Upload photos and videos during the trip - everyone can contribute!</p>
-
-    <div class="gallery-section">
-      <div id="gallery-container" class="gallery-grid">
-        <!-- Photos load here -->
-      </div>
-    </div>
-  </section>
-
   <!-- Family Journal -->
   <section>
-    <h2 class="section-title">📝 Family Journal</h2>
+    <h2 class="section-title" id="journal">📝 Family Journal</h2>
     <p style="color: var(--gray); margin-bottom: 20px;">Write memories, thoughts, and favorite moments throughout the trip!</p>
 
     <div id="journal-entries" class="journal-entries">
@@ -1329,18 +1480,18 @@
           <option value="">Select a day...</option>
           <option value="1">Day 1 - Sacramento / Lion King</option>
           <option value="2">Day 2 - Jelly Belly / Sharks Game</option>
-          <option value="3">Day 3 - Drive to Disney / Arrive</option>
-          <option value="4">Day 4 - Rest / Pool Day</option>
-          <option value="5">Day 5 - Disneyland</option>
-          <option value="6">Day 6 - Cabana Day</option>
-          <option value="7">Day 7 - Disney with Steph</option>
-          <option value="8">Day 8 - Steph's House</option>
-          <option value="9">Day 9 - Disneyland</option>
-          <option value="10">Day 10 - Disney → Great Wolf / Medieval Times</option>
-          <option value="11">Day 11 - Great Wolf / Ducks Game</option>
-          <option value="12">Day 12 - Drive to Redding</option>
-          <option value="13">Day 13 - Shasta Caverns</option>
-          <option value="14">Day 14 - Turtle Bay / Home</option>
+          <option value="3">Day 3 - Arrive at Disney</option>
+          <option value="4">Day 4 - Park Day (Sun)</option>
+          <option value="5">Day 5 - Cabana Day (Mon)</option>
+          <option value="6">Day 6 - Park Day (Tue)</option>
+          <option value="7">Day 7 - Steph's (Wed)</option>
+          <option value="8">Day 8 - Park Day (Thu)</option>
+          <option value="9">Day 9 - Park Day (Fri)</option>
+          <option value="10">Day 10 - Great Wolf / Medieval Times (Sat)</option>
+          <option value="11">Day 11 - Great Wolf / Ducks Game (Sun)</option>
+          <option value="12">Day 12 - Drive to Redding (Mon)</option>
+          <option value="13">Day 13 - Shasta Caverns (Tue)</option>
+          <option value="14">Day 14 - Turtle Bay / Home (Wed)</option>
         </select>
       </div>
       <button class="btn" id="upload-btn" onclick="openCloudinaryWidget()">📷 Choose Photos or Videos</button>
@@ -1408,18 +1559,18 @@
             <option value="">General / No specific day</option>
             <option value="1">Day 1 - Sacramento / Lion King</option>
             <option value="2">Day 2 - Jelly Belly / Sharks Game</option>
-            <option value="3">Day 3 - Drive to Disney / Arrive</option>
-            <option value="4">Day 4 - Rest / Pool Day</option>
-            <option value="5">Day 5 - Disneyland</option>
-            <option value="6">Day 6 - Cabana Day</option>
-            <option value="7">Day 7 - Disney with Steph</option>
-            <option value="8">Day 8 - Steph's House</option>
-            <option value="9">Day 9 - Disneyland</option>
-            <option value="10">Day 10 - Disney → Great Wolf / Medieval Times</option>
-            <option value="11">Day 11 - Great Wolf / Ducks Game</option>
-            <option value="12">Day 12 - Drive to Redding</option>
-            <option value="13">Day 13 - Shasta Caverns</option>
-            <option value="14">Day 14 - Turtle Bay / Home</option>
+            <option value="3">Day 3 - Arrive at Disney</option>
+            <option value="4">Day 4 - Park Day (Sun)</option>
+            <option value="5">Day 5 - Cabana Day (Mon)</option>
+            <option value="6">Day 6 - Park Day (Tue)</option>
+            <option value="7">Day 7 - Steph's (Wed)</option>
+            <option value="8">Day 8 - Park Day (Thu)</option>
+            <option value="9">Day 9 - Park Day (Fri)</option>
+            <option value="10">Day 10 - Great Wolf / Medieval Times (Sat)</option>
+            <option value="11">Day 11 - Great Wolf / Ducks Game (Sun)</option>
+            <option value="12">Day 12 - Drive to Redding (Mon)</option>
+            <option value="13">Day 13 - Shasta Caverns (Tue)</option>
+            <option value="14">Day 14 - Turtle Bay / Home (Wed)</option>
           </select>
         </div>
         <div class="form-group">
@@ -1434,7 +1585,10 @@
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">&#8249;</button>
     <img id="lightbox-img" src="">
+    <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">&#8250;</button>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
     <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
 
@@ -1444,6 +1598,20 @@
   <script>
     // API Configuration - Cloudflare Worker
     const API_URL = 'https://donnelly-api.brandondonnelly33.workers.dev';
+
+    // Day-to-section mapping
+    const DAY_SECTION_MAP = {
+      '1': 'sacramento',
+      '2': 'sanjose',
+      '3': 'disney', '4': 'disney', '5': 'disney', '6': 'disney',
+      '7': 'disney', '8': 'disney', '9': 'disney',
+      '10': 'greatwolf', '11': 'greatwolf',
+      '12': 'redding', '13': 'redding', '14': 'redding'
+    };
+
+    // All photos array for lightbox navigation
+    let allPhotos = [];
+    let currentLightboxIndex = 0;
 
     // Create stars
     function createStars() {
@@ -1459,6 +1627,37 @@
     }
     createStars();
 
+    // Tab navigation - highlight active section on scroll
+    const tabLinks = document.querySelectorAll('.tab-link');
+    const tabNav = document.getElementById('tab-nav');
+
+    function updateActiveTab() {
+      const scrollPos = window.scrollY + 100;
+      let activeId = '';
+
+      document.querySelectorAll('[id]').forEach(section => {
+        if (section.offsetTop <= scrollPos) {
+          activeId = section.id;
+        }
+      });
+
+      tabLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + activeId);
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveTab);
+    tabLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offset = tabNav.offsetHeight + 10;
+          window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+        }
+      });
+    });
+
     // Countdown
     function updateCountdown() {
       const tripStart = new Date('2026-01-22T06:00:00');
@@ -1466,7 +1665,7 @@
       const diff = tripStart - now;
 
       if (diff <= 0) {
-        document.querySelector('.countdown').innerHTML = '<div style="font-size: 36px; color: var(--gold); font-weight: 900;">THE ADVENTURE HAS BEGUN! 🎉</div>';
+        document.querySelector('.countdown').innerHTML = '<div style="font-size: 36px; color: var(--gold); font-weight: 900;">THE ADVENTURE HAS BEGUN!</div>';
         document.getElementById('footer-message').textContent = "WE'RE ON OUR ADVENTURE!";
         return;
       }
@@ -1504,7 +1703,6 @@
       const uploadedBy = document.getElementById('upload-name').value || 'Anonymous';
       const dayNumber = document.getElementById('upload-day').value || '0';
 
-      // Reset pending uploads
       pendingUploads = [];
 
       const widget = cloudinary.createUploadWidget({
@@ -1538,7 +1736,6 @@
         }
       }, (error, result) => {
         if (!error && result && result.event === 'success') {
-          // Track each successful upload
           pendingUploads.push({
             public_id: result.info.public_id,
             url: result.info.secure_url,
@@ -1548,7 +1745,6 @@
         }
         if (result && result.event === 'close') {
           closeModal('upload');
-          // If we have uploads, show the caption modal
           if (pendingUploads.length > 0) {
             showCaptionModal();
           }
@@ -1578,14 +1774,12 @@
       document.getElementById('modal-captions').classList.add('active');
     }
 
-    // Close caption modal
     function closeCaptionModal() {
       document.getElementById('modal-captions').classList.remove('active');
       pendingUploads = [];
       loadPhotos();
     }
 
-    // Save all captions from batch upload
     async function saveCaptions() {
       const inputs = document.querySelectorAll('#caption-photos-list input');
       let saved = 0;
@@ -1614,19 +1808,20 @@
         }
       }
 
-      showToast(`${saved > 0 ? saved + ' caption' + (saved > 1 ? 's' : '') + ' saved!' : 'Photos uploaded!'} 📸`);
+      showToast(`${saved > 0 ? saved + ' caption' + (saved > 1 ? 's' : '') + ' saved!' : 'Photos uploaded!'}`);
       closeCaptionModal();
     }
 
-    // Edit single photo caption
+    // Edit single photo caption - opens on any click on the photo info area
     function openEditPhoto(publicId, url, caption) {
       document.getElementById('edit-photo-id').value = publicId;
       document.getElementById('edit-photo-img').src = url;
       document.getElementById('edit-photo-caption').value = caption || '';
       document.getElementById('modal-edit-photo').classList.add('active');
+      // Auto-focus the caption input
+      setTimeout(() => document.getElementById('edit-photo-caption').focus(), 100);
     }
 
-    // Save single photo edit
     async function savePhotoEdit() {
       const publicId = document.getElementById('edit-photo-id').value;
       const caption = document.getElementById('edit-photo-caption').value.trim();
@@ -1639,7 +1834,7 @@
         });
 
         if (res.ok) {
-          showToast('Caption updated! ✏️');
+          showToast('Caption updated!');
           closeModal('edit-photo');
           loadPhotos();
         } else {
@@ -1650,7 +1845,6 @@
       }
     }
 
-    // Delete photo
     async function deletePhoto(publicId) {
       if (!confirm('Delete this photo?')) return;
 
@@ -1692,7 +1886,7 @@
         });
 
         if (res.ok) {
-          showToast('Entry posted! ✏️');
+          showToast('Entry posted!');
           closeModal('journal');
           document.getElementById('journal-form').reset();
           loadJournal();
@@ -1702,45 +1896,94 @@
       }
     });
 
-    // Load photos from Cloudinary
+    // Render a photo gallery item
+    function renderPhotoItem(photo) {
+      const safeCaption = (photo.caption || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+      const photoIndex = allPhotos.findIndex(p => p.public_id === photo.public_id);
+      return `
+        <div class="gallery-item" data-id="${photo.public_id}">
+          <div class="photo-wrapper" onclick="openLightboxAt(${photoIndex})">
+            <img src="${photo.url}" alt="${photo.caption || ''}">
+          </div>
+          <div class="photo-info" onclick="event.stopPropagation(); openEditPhoto('${photo.public_id}', '${photo.url}', '${safeCaption}')" style="cursor: pointer;">
+            ${photo.caption ? `<div class="photo-caption">${photo.caption}</div>` : '<div class="photo-caption" style="color: var(--gold); font-style: italic; font-size: 12px;">Tap to add caption</div>'}
+            <div class="photo-meta">
+              <span class="photo-author">${photo.uploaded_by || 'Anonymous'}</span>
+              <div class="photo-actions">
+                <button class="edit-btn" onclick="event.stopPropagation(); openEditPhoto('${photo.public_id}', '${photo.url}', '${safeCaption}')">Edit</button>
+                <button class="delete-btn" onclick="event.stopPropagation(); deletePhoto('${photo.public_id}')">Del</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Load photos and distribute to sections
     async function loadPhotos() {
-      const container = document.getElementById('gallery-container');
+      const sections = ['sacramento', 'sanjose', 'disney', 'greatwolf', 'redding'];
+      const sectionContainers = {};
+      const sectionCounts = {};
+
+      sections.forEach(s => {
+        sectionContainers[s] = document.getElementById(`gallery-${s}`);
+        sectionCounts[s] = 0;
+      });
 
       try {
         const res = await fetch(`${API_URL}/api/photos`);
         const photos = await res.json();
+        allPhotos = photos;
 
-        if (photos.length === 0) {
-          container.innerHTML = `
-            <div class="empty-state" style="grid-column: 1/-1;">
-              <div class="icon">📷</div>
-              <p>No photos yet - be the first to add a memory!</p>
-            </div>
-          `;
-          return;
+        // Group photos by section
+        const grouped = { sacramento: [], sanjose: [], disney: [], greatwolf: [], redding: [], unassigned: [] };
+
+        photos.forEach(photo => {
+          const section = DAY_SECTION_MAP[photo.day_number] || 'unassigned';
+          if (grouped[section]) {
+            grouped[section].push(photo);
+          } else {
+            grouped.unassigned.push(photo);
+          }
+        });
+
+        // Render each section
+        sections.forEach(section => {
+          const container = sectionContainers[section];
+          const sectionPhotos = grouped[section];
+          const galleryWrapper = container.closest('.section-gallery');
+          const countEl = galleryWrapper.querySelector('.photo-count');
+
+          if (sectionPhotos.length === 0) {
+            container.innerHTML = `
+              <div class="empty-state" style="grid-column: 1/-1;">
+                <div class="icon">📷</div>
+                <p>No photos yet for this stop</p>
+              </div>
+            `;
+            countEl.textContent = '';
+          } else {
+            container.innerHTML = sectionPhotos.map(p => renderPhotoItem(p)).join('');
+            countEl.textContent = `${sectionPhotos.length} photo${sectionPhotos.length !== 1 ? 's' : ''}`;
+          }
+        });
+
+        // If there are unassigned photos, add them to the first section with a note
+        if (grouped.unassigned.length > 0) {
+          const generalContainer = sectionContainers.sacramento;
+          const existing = generalContainer.innerHTML;
+          if (existing.includes('empty-state')) {
+            generalContainer.innerHTML = '';
+          }
+          grouped.unassigned.forEach(p => {
+            generalContainer.innerHTML += renderPhotoItem(p);
+          });
         }
 
-        container.innerHTML = photos.map(photo => {
-          const safeCaption = (photo.caption || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
-          return `
-          <div class="gallery-item" data-id="${photo.public_id}">
-            <div class="photo-wrapper" onclick="openLightbox('${photo.url}', '${safeCaption}')">
-              <img src="${photo.url}" alt="${photo.caption || ''}">
-            </div>
-            <div class="photo-info">
-              ${photo.caption ? `<div class="photo-caption">${photo.caption}</div>` : '<div class="photo-caption" style="color: var(--gray); font-style: italic;">No caption</div>'}
-              <div class="photo-meta">
-                <span class="photo-author">${photo.uploaded_by || 'Anonymous'}${photo.day_number && photo.day_number !== '0' ? ` • Day ${photo.day_number}` : ''}</span>
-                <div class="photo-actions">
-                  <button class="edit-btn" onclick="event.stopPropagation(); openEditPhoto('${photo.public_id}', '${photo.url}', '${safeCaption}')">Edit</button>
-                  <button class="delete-btn" onclick="event.stopPropagation(); deletePhoto('${photo.public_id}')">Delete</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        `}).join('');
       } catch (err) {
-        container.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;"><div class="icon">📷</div><p>Upload photos during the trip!</p></div>';
+        sections.forEach(section => {
+          sectionContainers[section].innerHTML = '<div class="empty-state" style="grid-column: 1/-1;"><div class="icon">📷</div><p>Upload photos during the trip!</p></div>';
+        });
       }
     }
 
@@ -1780,16 +2023,54 @@
       }
     }
 
-    // Lightbox
-    function openLightbox(url, caption) {
-      document.getElementById('lightbox-img').src = url;
-      document.getElementById('lightbox-caption').textContent = caption;
+    // Lightbox with navigation
+    function openLightboxAt(index) {
+      if (index < 0 || index >= allPhotos.length) return;
+      currentLightboxIndex = index;
+      const photo = allPhotos[index];
+      document.getElementById('lightbox-img').src = photo.url;
+      document.getElementById('lightbox-caption').textContent = photo.caption || '';
+      document.getElementById('lightbox-counter').textContent = `${index + 1} / ${allPhotos.length}`;
       document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function navigateLightbox(direction) {
+      let newIndex = currentLightboxIndex + direction;
+      if (newIndex < 0) newIndex = allPhotos.length - 1;
+      if (newIndex >= allPhotos.length) newIndex = 0;
+      openLightboxAt(newIndex);
     }
 
     function closeLightbox() {
       document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
     }
+
+    // Swipe support for lightbox on mobile
+    let touchStartX = 0;
+    const lightboxEl = document.getElementById('lightbox');
+    lightboxEl.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+    lightboxEl.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].screenX - touchStartX;
+      if (Math.abs(diff) > 50) {
+        navigateLightbox(diff > 0 ? -1 : 1);
+      }
+    });
+
+    // Keyboard navigation for lightbox
+    document.addEventListener('keydown', function(e) {
+      if (document.getElementById('lightbox').classList.contains('active')) {
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+        if (e.key === 'Escape') closeLightbox();
+      } else if (e.key === 'Escape') {
+        closeModal('upload');
+        closeModal('journal');
+        closeModal('edit-photo');
+        closeModal('captions');
+      }
+    });
 
     // Toast
     function showToast(message) {
@@ -1819,15 +2100,6 @@
     // Initial load
     loadPhotos();
     loadJournal();
-
-    // Close modals on escape
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeModal('upload');
-        closeModal('journal');
-        closeLightbox();
-      }
-    });
   </script>
 
 </body>
