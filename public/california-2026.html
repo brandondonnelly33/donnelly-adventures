@@ -1532,7 +1532,27 @@
         <label>Caption</label>
         <input type="text" id="edit-photo-caption" placeholder="Add a caption...">
       </div>
-      <button class="btn" onclick="savePhotoEdit()">💾 Save</button>
+      <div class="form-group">
+        <label>Which Day / Event?</label>
+        <select id="edit-photo-day">
+          <option value="0">No specific day</option>
+          <option value="1">Day 1 - Sacramento / Lion King</option>
+          <option value="2">Day 2 - Jelly Belly / Sharks Game</option>
+          <option value="3">Day 3 - Arrive at Disney</option>
+          <option value="4">Day 4 - Park Day (Sun)</option>
+          <option value="5">Day 5 - Cabana Day (Mon)</option>
+          <option value="6">Day 6 - Park Day (Tue)</option>
+          <option value="7">Day 7 - Steph's (Wed)</option>
+          <option value="8">Day 8 - Park Day (Thu)</option>
+          <option value="9">Day 9 - Park Day (Fri)</option>
+          <option value="10">Day 10 - Great Wolf / Medieval Times (Sat)</option>
+          <option value="11">Day 11 - Great Wolf / Ducks Game (Sun)</option>
+          <option value="12">Day 12 - Drive to Redding (Mon)</option>
+          <option value="13">Day 13 - Shasta Caverns (Tue)</option>
+          <option value="14">Day 14 - Turtle Bay / Home (Wed)</option>
+        </select>
+      </div>
+      <button class="btn" onclick="savePhotoEdit()">Save</button>
     </div>
   </div>
 
@@ -1812,25 +1832,26 @@
       closeCaptionModal();
     }
 
-    // Edit single photo caption - opens on any click on the photo info area
-    function openEditPhoto(publicId, url, caption) {
+    // Edit single photo - caption and day/event
+    function openEditPhoto(publicId, url, caption, dayNumber) {
       document.getElementById('edit-photo-id').value = publicId;
       document.getElementById('edit-photo-img').src = url;
       document.getElementById('edit-photo-caption').value = caption || '';
+      document.getElementById('edit-photo-day').value = dayNumber || '0';
       document.getElementById('modal-edit-photo').classList.add('active');
-      // Auto-focus the caption input
       setTimeout(() => document.getElementById('edit-photo-caption').focus(), 100);
     }
 
     async function savePhotoEdit() {
       const publicId = document.getElementById('edit-photo-id').value;
       const caption = document.getElementById('edit-photo-caption').value.trim();
+      const dayNumber = document.getElementById('edit-photo-day').value;
 
       try {
         const res = await fetch(`${API_URL}/api/photos/${encodeURIComponent(publicId)}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ caption: caption })
+          body: JSON.stringify({ caption: caption, day_number: dayNumber })
         });
 
         if (res.ok) {
@@ -1905,12 +1926,12 @@
           <div class="photo-wrapper" onclick="openLightboxAt(${photoIndex})">
             <img src="${photo.url}" alt="${photo.caption || ''}">
           </div>
-          <div class="photo-info" onclick="event.stopPropagation(); openEditPhoto('${photo.public_id}', '${photo.url}', '${safeCaption}')" style="cursor: pointer;">
-            ${photo.caption ? `<div class="photo-caption">${photo.caption}</div>` : '<div class="photo-caption" style="color: var(--gold); font-style: italic; font-size: 12px;">Tap to add caption</div>'}
+          <div class="photo-info" onclick="event.stopPropagation(); openEditPhoto('${photo.public_id}', '${photo.url}', '${safeCaption}', '${photo.day_number || 0}')" style="cursor: pointer;">
+            ${photo.caption ? `<div class="photo-caption">${photo.caption}</div>` : '<div class="photo-caption" style="color: var(--gold); font-style: italic; font-size: 12px;">Tap to edit</div>'}
             <div class="photo-meta">
               <span class="photo-author">${photo.uploaded_by || 'Anonymous'}</span>
               <div class="photo-actions">
-                <button class="edit-btn" onclick="event.stopPropagation(); openEditPhoto('${photo.public_id}', '${photo.url}', '${safeCaption}')">Edit</button>
+                <button class="edit-btn" onclick="event.stopPropagation(); openEditPhoto('${photo.public_id}', '${photo.url}', '${safeCaption}', '${photo.day_number || 0}')">Edit</button>
                 <button class="delete-btn" onclick="event.stopPropagation(); deletePhoto('${photo.public_id}')">Del</button>
               </div>
             </div>
