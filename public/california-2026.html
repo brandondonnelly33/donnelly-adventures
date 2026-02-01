@@ -1142,6 +1142,445 @@
       .lightbox-nav { width: 40px; height: 40px; font-size: 18px; }
       .lightbox-prev { left: 10px; }
       .lightbox-next { right: 10px; }
+      .trip-progress-bar { flex-direction: column; gap: 15px; padding: 20px; }
+      .weather-widget { flex-direction: column; text-align: center; }
+    }
+
+    /* ========== NEW FEATURES ========== */
+
+    /* Trip Progress Bar */
+    .trip-progress-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, rgba(239,191,4,0.2), rgba(173,235,179,0.1));
+      border: 2px solid var(--gold);
+      border-radius: 20px;
+      padding: 20px 30px;
+      margin: 20px auto;
+      max-width: 800px;
+      gap: 20px;
+      box-shadow: 0 10px 40px rgba(239,191,4,0.2);
+    }
+
+    .trip-progress-info {
+      text-align: center;
+    }
+
+    .trip-day-number {
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      text-shadow: 0 0 30px rgba(239,191,4,0.5);
+    }
+
+    .trip-day-label {
+      font-size: 14px;
+      color: var(--green-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .trip-progress-visual {
+      flex: 1;
+      max-width: 400px;
+    }
+
+    .trip-progress-track {
+      background: rgba(0,0,0,0.4);
+      border-radius: 10px;
+      height: 20px;
+      overflow: hidden;
+      border: 2px solid rgba(173,235,179,0.3);
+    }
+
+    .trip-progress-fill {
+      background: linear-gradient(90deg, var(--green-light), var(--gold));
+      height: 100%;
+      border-radius: 8px;
+      transition: width 1s ease;
+      box-shadow: 0 0 20px rgba(239,191,4,0.5);
+    }
+
+    .trip-progress-text {
+      text-align: center;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .trip-location {
+      text-align: center;
+    }
+
+    .trip-location-icon {
+      font-size: 36px;
+      margin-bottom: 5px;
+    }
+
+    .trip-location-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--green-light);
+    }
+
+    /* Weather Widget */
+    .weather-widget {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: linear-gradient(135deg, rgba(173,235,179,0.15), rgba(0,0,0,0.3));
+      border: 1px solid rgba(173,235,179,0.3);
+      border-radius: 16px;
+      padding: 15px 25px;
+      margin: 20px auto;
+      max-width: 500px;
+    }
+
+    .weather-icon {
+      font-size: 48px;
+    }
+
+    .weather-info {
+      flex: 1;
+    }
+
+    .weather-temp {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--gold);
+    }
+
+    .weather-desc {
+      font-size: 14px;
+      color: var(--green-light);
+    }
+
+    .weather-location {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    /* Currently At Indicator */
+    .destination.currently-here {
+      border-color: var(--gold) !important;
+      box-shadow: 0 0 40px rgba(239,191,4,0.3), 0 20px 60px rgba(0,0,0,0.4) !important;
+    }
+
+    .destination.currently-here .destination-header {
+      background: linear-gradient(135deg, rgba(239,191,4,0.3), rgba(173,235,179,0.2)) !important;
+    }
+
+    .currently-here-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      animation: liveGlow 2s ease-in-out infinite;
+      margin-left: 10px;
+    }
+
+    .currently-here-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      animation: liveDot 1s ease-in-out infinite;
+    }
+
+    @keyframes liveGlow {
+      0%, 100% { box-shadow: 0 0 10px rgba(239,68,68,0.5); }
+      50% { box-shadow: 0 0 25px rgba(239,68,68,0.8); }
+    }
+
+    @keyframes liveDot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Entrance Animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .animate-on-scroll.delay-1 { transition-delay: 0.1s; }
+    .animate-on-scroll.delay-2 { transition-delay: 0.2s; }
+    .animate-on-scroll.delay-3 { transition-delay: 0.3s; }
+
+    /* Emoji Reactions */
+    .reactions-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 0;
+      flex-wrap: wrap;
+    }
+
+    .reaction-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .reaction-btn:hover {
+      background: rgba(239,191,4,0.3);
+      border-color: var(--gold);
+      transform: scale(1.1);
+    }
+
+    .reaction-btn.active {
+      background: rgba(239,191,4,0.4);
+      border-color: var(--gold);
+    }
+
+    .reaction-btn .count {
+      font-size: 12px;
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .add-reaction-btn {
+      background: transparent;
+      border: 2px dashed rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 14px;
+      color: var(--gray);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .add-reaction-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .reaction-picker {
+      position: absolute;
+      background: var(--green-dark);
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 10px;
+      display: none;
+      gap: 8px;
+      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .reaction-picker.show {
+      display: flex;
+    }
+
+    .reaction-picker button {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .reaction-picker button:hover {
+      background: rgba(239,191,4,0.3);
+      transform: scale(1.2);
+    }
+
+    /* Offline indicator */
+    .offline-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(90deg, #ef4444, #dc2626);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 9999;
+      display: none;
+    }
+
+    .offline-banner.show {
+      display: block;
+    }
+
+    /* Memory Counter */
+    .memory-counter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      background: linear-gradient(135deg, rgba(173,235,179,0.15), rgba(239,191,4,0.1));
+      border: 2px solid rgba(173,235,179,0.4);
+      border-radius: 16px;
+      padding: 20px 30px;
+      margin: 20px auto;
+      max-width: 400px;
+      animation: memoryGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes memoryGlow {
+      0%, 100% { box-shadow: 0 5px 30px rgba(173,235,179,0.2); }
+      50% { box-shadow: 0 5px 40px rgba(173,235,179,0.4); }
+    }
+
+    .memory-counter-icon {
+      font-size: 48px;
+      animation: cameraBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes cameraBounce {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.1) rotate(-5deg); }
+      75% { transform: scale(1.1) rotate(5deg); }
+    }
+
+    .memory-counter-stats {
+      text-align: left;
+    }
+
+    .memory-count {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--green-light);
+    }
+
+    .memory-count span {
+      color: var(--gold);
+      font-size: 32px;
+    }
+
+    .memory-subtitle {
+      font-size: 13px;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    /* Photo of the Day */
+    .photo-of-day {
+      background: linear-gradient(135deg, rgba(239,191,4,0.15), rgba(173,235,179,0.08));
+      border: 3px solid var(--gold);
+      border-radius: 24px;
+      padding: 25px;
+      margin: 25px auto;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 15px 50px rgba(239,191,4,0.2);
+      display: none;
+    }
+
+    .photo-of-day.show {
+      display: block;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .photo-of-day-label {
+      font-size: 14px;
+      color: var(--gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .photo-of-day-image-wrapper {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      margin-bottom: 15px;
+    }
+
+    .photo-of-day-image-wrapper img {
+      width: 100%;
+      max-height: 350px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-of-day-image-wrapper:hover img {
+      transform: scale(1.03);
+    }
+
+    .photo-of-day-caption {
+      font-size: 18px;
+      color: var(--white);
+      font-weight: 600;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .photo-of-day-meta {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .potd-author {
+      color: var(--gold);
+    }
+
+    /* Today's Calendar Highlight */
+    .cal-day.today {
+      position: relative;
+      animation: todayPulse 2s ease-in-out infinite;
+      transform: scale(1.1);
+      z-index: 10;
+    }
+
+    .cal-day.today::after {
+      content: 'TODAY!';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--green-dark);
+      font-size: 9px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 768px) {
+      .memory-counter { flex-direction: column; text-align: center; padding: 15px 20px; }
+      .memory-counter-stats { text-align: center; }
+      .photo-of-day { margin: 20px 15px; padding: 20px; }
+      .photo-of-day-image-wrapper img { max-height: 280px; }
     }
   </style>
 </head>
@@ -1201,6 +1640,61 @@
     </div>
   </div>
 
+  <!-- Offline Banner -->
+  <div class="offline-banner" id="offline-banner">
+    📴 You're offline - but don't worry, everything still works!
+  </div>
+
+  <!-- Trip Progress Bar -->
+  <div class="trip-progress-bar" id="trip-progress">
+    <div class="trip-progress-info">
+      <div class="trip-day-number" id="current-day">--</div>
+      <div class="trip-day-label">Day of Trip</div>
+    </div>
+    <div class="trip-progress-visual">
+      <div class="trip-progress-track">
+        <div class="trip-progress-fill" id="progress-fill" style="width: 0%"></div>
+      </div>
+      <div class="trip-progress-text" id="progress-text">Trip hasn't started yet!</div>
+    </div>
+    <div class="trip-location">
+      <div class="trip-location-icon" id="location-icon">🏠</div>
+      <div class="trip-location-name" id="location-name">Home</div>
+    </div>
+  </div>
+
+  <!-- Weather Widget -->
+  <div class="weather-widget" id="weather-widget">
+    <div class="weather-icon" id="weather-icon">🌤️</div>
+    <div class="weather-info">
+      <div class="weather-temp" id="weather-temp">--°F</div>
+      <div class="weather-desc" id="weather-desc">Loading weather...</div>
+      <div class="weather-location" id="weather-location">Current destination</div>
+    </div>
+  </div>
+
+  <!-- Memory Counter -->
+  <div class="memory-counter" id="memory-counter">
+    <div class="memory-counter-icon">📸</div>
+    <div class="memory-counter-stats">
+      <div class="memory-count"><span id="photo-count">--</span> Memories Captured</div>
+      <div class="memory-subtitle" id="memory-subtitle">Loading...</div>
+    </div>
+  </div>
+
+  <!-- Photo of the Day -->
+  <div class="photo-of-day" id="photo-of-day">
+    <div class="photo-of-day-label">✨ Featured Memory ✨</div>
+    <div class="photo-of-day-image-wrapper">
+      <img id="potd-image" src="" alt="Photo of the day" loading="lazy">
+    </div>
+    <div class="photo-of-day-caption" id="potd-caption"></div>
+    <div class="photo-of-day-meta">
+      <span class="potd-author">📷 <span id="potd-author"></span></span>
+      <span class="potd-day" id="potd-day"></span>
+    </div>
+  </div>
+
   <!-- Tab Navigation -->
   <nav class="tab-nav" id="tab-nav">
     <a href="#route" class="tab-link">Route</a>
@@ -1247,8 +1741,8 @@
         <div class="destination-dates">Thursday, Jan 22 • 1 Night • 530 miles from Sherwood</div>
       </div>
       <div class="photo-grid">
-        <img src="https://cdn.mytheatreland.com/images/show/03102_show_1279x840_03.jpg" alt="The Lion King Musical">
-        <img src="https://cdn-tp1.mozu.com/9046-m1/cms/files/3cf7d9f5-917c-4866-bd95-38f06ce67586?max=1920" alt="Jelly Belly Factory">
+        <img src="https://cdn.mytheatreland.com/images/show/03102_show_1279x840_03.jpg" alt="The Lion King Musical" loading="lazy">
+        <img src="https://cdn-tp1.mozu.com/9046-m1/cms/files/3cf7d9f5-917c-4866-bd95-38f06ce67586?max=1920" alt="Jelly Belly Factory" loading="lazy">
       </div>
       <div class="destination-content">
         <p><span class="highlight">The Lion King @ SAFE Credit Union Performing Arts Center</span> - 7:30 PM<br>
@@ -1272,8 +1766,8 @@
         <div class="destination-dates">Friday, Jan 23 • 1 Night • 115 miles from Sacramento (via Jelly Belly)</div>
       </div>
       <div class="photo-grid">
-        <img src="https://media.d3.nhle.com/image/private/t_ratio16_9-size40/dpr_2.0/f_png/v1732025093/prd/l8y3g90ap8awanthfuw3.png" alt="San Jose Sharks">
-        <img src="https://media.video-cdn.espn.com/motion/2025/1023/e75096bbf0764d928b4b19a39a57aabf1298/e75096bbf0764d928b4b19a39a57aabf1298.jpg" alt="Sharks Hockey Game">
+        <img src="https://media.d3.nhle.com/image/private/t_ratio16_9-size40/dpr_2.0/f_png/v1732025093/prd/l8y3g90ap8awanthfuw3.png" alt="San Jose Sharks" loading="lazy">
+        <img src="https://media.video-cdn.espn.com/motion/2025/1023/e75096bbf0764d928b4b19a39a57aabf1298/e75096bbf0764d928b4b19a39a57aabf1298.jpg" alt="Sharks Hockey Game" loading="lazy">
       </div>
       <div class="destination-content">
         <p><span class="highlight">Sharks vs Rangers @ SAP Center</span> - Section 127, Row 15, <strong>CLUB SEATS!</strong> 🔥<br>
@@ -1295,12 +1789,12 @@
         <div class="destination-dates">Saturday, Jan 24 - Saturday, Jan 31 • 366 miles from San Jose</div>
       </div>
       <div class="photo-grid">
-        <img src="https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/dlr/things-to-do/sports-and-recreation-centers/disneyland-hotel/pools-at-disneyland-hotel/pools-disneyland-hotel-04.jpg?1743792166313" alt="Disneyland Hotel Pool">
-        <img src="https://playgroundhb.com/cdn/shop/files/Screenshot_2025-08-07_at_11.04.25_PM.png?v=1754633103&width=1600" alt="Arcade Fun">
+        <img src="https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/dlr/things-to-do/sports-and-recreation-centers/disneyland-hotel/pools-at-disneyland-hotel/pools-disneyland-hotel-04.jpg?1743792166313" alt="Disneyland Hotel Pool" loading="lazy">
+        <img src="https://playgroundhb.com/cdn/shop/files/Screenshot_2025-08-07_at_11.04.25_PM.png?v=1754633103&width=1600" alt="Arcade Fun" loading="lazy">
       </div>
       <div class="photo-grid">
-        <img src="https://www.disneytouristblog.com/wp-content/uploads/2025/05/wondrous-journeys-fireworks-disneyland-70th-anniversary-california-854.jpg" alt="Disney Fireworks">
-        <img src="https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/big-thunder-mountain-railroad/big-thunder-mountain-railroad-00.jpg?1765208789463" alt="Big Thunder Mountain">
+        <img src="https://www.disneytouristblog.com/wp-content/uploads/2025/05/wondrous-journeys-fireworks-disneyland-70th-anniversary-california-854.jpg" alt="Disney Fireworks" loading="lazy">
+        <img src="https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/big-thunder-mountain-railroad/big-thunder-mountain-railroad-00.jpg?1765208789463" alt="Big Thunder Mountain" loading="lazy">
       </div>
       <div class="destination-content">
         <p><span class="highlight">Schedule:</span><br>
@@ -1330,12 +1824,12 @@
         <div class="destination-dates">Saturday, Jan 31 - Monday, Feb 2 • 2 Nights • 3 miles from Disney</div>
       </div>
       <div class="photo-grid">
-        <img src="https://www.momrewritten.com/wp-content/uploads/2025/11/Great-wolf-lodge-wave-pool-overview-728x546.jpg.webp" alt="Great Wolf Lodge Wave Pool">
-        <img src="https://www.rci.com/static/Resorts/Assets/RP71E01L.jpg" alt="Great Wolf Lodge Waterpark">
+        <img src="https://www.momrewritten.com/wp-content/uploads/2025/11/Great-wolf-lodge-wave-pool-overview-728x546.jpg.webp" alt="Great Wolf Lodge Wave Pool" loading="lazy">
+        <img src="https://www.rci.com/static/Resorts/Assets/RP71E01L.jpg" alt="Great Wolf Lodge Waterpark" loading="lazy">
       </div>
       <div class="photo-grid">
-        <img src="https://californiathroughmylens.com/wp-content/uploads/2017/01/medieval-times-13.jpg" alt="Medieval Times">
-        <img src="https://ewscripps.brightspotcdn.com/dims4/default/0cf666b/2147483647/strip/true/crop/3618x2035+0+188/resize/1280x720!/quality/90/?url=http%3A%2F%2Fewscripps-brightspot.s3.amazonaws.com%2F86%2F65%2Fee82cb744b06b5f0e3e4901f20d1%2Fap24110134853676.jpg" alt="Anaheim Ducks Hockey">
+        <img src="https://californiathroughmylens.com/wp-content/uploads/2017/01/medieval-times-13.jpg" alt="Medieval Times" loading="lazy">
+        <img src="https://ewscripps.brightspotcdn.com/dims4/default/0cf666b/2147483647/strip/true/crop/3618x2035+0+188/resize/1280x720!/quality/90/?url=http%3A%2F%2Fewscripps-brightspot.s3.amazonaws.com%2F86%2F65%2Fee82cb744b06b5f0e3e4901f20d1%2Fap24110134853676.jpg" alt="Anaheim Ducks Hockey" loading="lazy">
       </div>
       <div class="destination-content">
         <p><span class="highlight">Full waterpark access!</span> 105,000 sq ft indoor waterpark - slides, wave pool, lazy river, MagiQuest!<br>
@@ -1358,12 +1852,12 @@
         <div class="destination-dates">Monday, Feb 2 - Wednesday, Feb 4 • 2 Nights • 573 miles from Great Wolf</div>
       </div>
       <div class="photo-grid">
-        <img src="https://cache.marriott.com/content/dam/marriott-renditions/RDDSI/rddsi-exterior-2636-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=750px:*" alt="Sheraton Redding Exterior">
-        <img src="https://drupal-prod.visitcalifornia.com/sites/default/files/styles/fluid_1920/public/VCW_D_SC_T4-Sundial%20Bridge_i-8p9WWv_R-L.jpg_KG.jpg.webp?itok=ewh2xT0N" alt="Sundial Bridge">
+        <img src="https://cache.marriott.com/content/dam/marriott-renditions/RDDSI/rddsi-exterior-2636-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=750px:*" alt="Sheraton Redding Exterior" loading="lazy">
+        <img src="https://drupal-prod.visitcalifornia.com/sites/default/files/styles/fluid_1920/public/VCW_D_SC_T4-Sundial%20Bridge_i-8p9WWv_R-L.jpg_KG.jpg.webp?itok=ewh2xT0N" alt="Sundial Bridge" loading="lazy">
       </div>
       <div class="photo-grid">
-        <img src="https://images.squarespace-cdn.com/content/v1/591d131d17bffc24f111e867/1591037067920-FUSKLSXQBYX7CKC9KIHZ/1T0A0051.jpg" alt="Turtle Bay">
-        <img src="https://krcrtv.com/resources/media2/16x9/3024/986/0x1166/90/85acdc73-4f19-4f05-84ff-e4662f147cb4-Image31.jpg" alt="Shasta Caverns">
+        <img src="https://images.squarespace-cdn.com/content/v1/591d131d17bffc24f111e867/1591037067920-FUSKLSXQBYX7CKC9KIHZ/1T0A0051.jpg" alt="Turtle Bay" loading="lazy">
+        <img src="https://krcrtv.com/resources/media2/16x9/3024/986/0x1166/90/85acdc73-4f19-4f05-84ff-e4662f147cb4-Image31.jpg" alt="Shasta Caverns" loading="lazy">
       </div>
       <div class="destination-content">
         <p><span class="highlight">The nicest room in Redding!</span> 1,100 sq ft Presidential Suite with 3 showers, pool view balcony.<br>
@@ -1396,7 +1890,7 @@
       <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 29</div><div class="cal-label">Thu</div></div>
       <div class="cal-day disney"><div class="cal-icon">🏰</div><div class="cal-date">Jan 30</div><div class="cal-label">Fri</div></div>
       <div class="cal-day wolf"><div class="cal-icon">⚔️</div><div class="cal-date">Jan 31</div><div class="cal-label">Sat</div></div>
-      <div class="cal-day wolf"><div class="cal-icon">🏒</div><div class="cal-date">Feb 1</div><div class="cal-label">Sun</div></div>
+      <div class="cal-day wolf today" id="cal-feb1"><div class="cal-icon">🏒</div><div class="cal-date">Feb 1</div><div class="cal-label">Sun</div></div>
       <div class="cal-day redding"><div class="cal-icon">🌉</div><div class="cal-date">Feb 2</div><div class="cal-label">Mon</div></div>
       <div class="cal-day redding"><div class="cal-icon">🚤</div><div class="cal-date">Feb 3</div><div class="cal-label">Tue</div></div>
       <div class="cal-day home"><div class="cal-icon">🏠</div><div class="cal-date">Feb 4</div><div class="cal-label">Wed</div></div>
@@ -1681,15 +2175,49 @@
     // Countdown
     function updateCountdown() {
       const tripStart = new Date('2026-01-22T06:00:00');
+      const tripEnd = new Date('2026-02-04T18:00:00');
       const now = new Date();
       const diff = tripStart - now;
 
-      if (diff <= 0) {
-        document.querySelector('.countdown').innerHTML = '<div style="font-size: 36px; color: var(--gold); font-weight: 900;">THE ADVENTURE HAS BEGUN!</div>';
-        document.getElementById('footer-message').textContent = "WE'RE ON OUR ADVENTURE!";
+      // During the trip - show exciting current day info!
+      if (diff <= 0 && now <= tripEnd) {
+        const msIntoTrip = now - tripStart;
+        const currentDay = Math.floor(msIntoTrip / (1000 * 60 * 60 * 24)) + 1;
+
+        // Get today's schedule from TRIP_SCHEDULE if available
+        const todaySchedule = typeof TRIP_SCHEDULE !== 'undefined'
+          ? TRIP_SCHEDULE.find(s => s.day === currentDay)
+          : { icon: '🌟', location: 'California' };
+
+        const icon = todaySchedule?.icon || '🌟';
+        const location = todaySchedule?.location || 'California';
+
+        document.querySelector('.countdown').innerHTML = `
+          <div style="text-align: center;">
+            <div style="font-size: 64px; margin-bottom: 10px;">${icon}</div>
+            <div style="font-size: clamp(28px, 7vw, 42px); color: var(--gold); font-weight: 900; margin-bottom: 8px;">DAY ${currentDay} OF 14</div>
+            <div style="font-size: clamp(18px, 4vw, 24px); color: var(--green-light);">${location}</div>
+            <div style="font-size: 14px; color: var(--gray); margin-top: 12px; text-transform: uppercase; letter-spacing: 2px;">Living the dream! 🎉</div>
+          </div>
+        `;
+        document.getElementById('footer-message').textContent = `DAY ${currentDay} - ${location.toUpperCase()}!`;
         return;
       }
 
+      // After the trip
+      if (now > tripEnd) {
+        document.querySelector('.countdown').innerHTML = `
+          <div style="text-align: center;">
+            <div style="font-size: 64px; margin-bottom: 10px;">💚</div>
+            <div style="font-size: clamp(28px, 7vw, 42px); color: var(--gold); font-weight: 900;">TRIP COMPLETE!</div>
+            <div style="font-size: clamp(16px, 4vw, 20px); color: var(--green-light); margin-top: 10px;">What an incredible adventure!</div>
+          </div>
+        `;
+        document.getElementById('footer-message').textContent = "WHAT AN AMAZING ADVENTURE!";
+        return;
+      }
+
+      // Before the trip - countdown
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -1917,17 +2445,19 @@
       }
     });
 
-    // Render a photo gallery item
+    // Render a photo gallery item with optimized thumbnails
     function renderPhotoItem(photo) {
       const safeCaption = (photo.caption || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
       const photoIndex = allPhotos.findIndex(p => p.public_id === photo.public_id);
+      // Use optimized thumbnail for gallery, full URL for lightbox/edit
+      const thumbnailUrl = optimizeCloudinaryUrl(photo.url, 300);
       return `
         <div class="gallery-item" data-id="${photo.public_id}">
           <div class="photo-wrapper" onclick="openLightboxAt(${photoIndex})">
-            <img src="${photo.url}" alt="${photo.caption || ''}">
+            <img src="${thumbnailUrl}" alt="${photo.caption || ''}" loading="lazy">
           </div>
           <div class="photo-info" onclick="event.stopPropagation(); openEditPhoto('${photo.public_id}', '${photo.url}', '${safeCaption}', '${photo.day_number || 0}')" style="cursor: pointer;">
-            ${photo.caption ? `<div class="photo-caption">${photo.caption}</div>` : '<div class="photo-caption" style="color: var(--gold); font-style: italic; font-size: 12px;">Tap to edit</div>'}
+            ${photo.caption ? `<div class="photo-caption">${photo.caption}</div>` : '<div class="photo-caption" style="color: var(--gold); font-style: italic; font-size: 12px;">Tap to add caption</div>'}
             <div class="photo-meta">
               <span class="photo-author">${photo.uploaded_by || 'Anonymous'}</span>
               <div class="photo-actions">
@@ -1938,6 +2468,14 @@
           </div>
         </div>
       `;
+    }
+
+    // Helper to optimize Cloudinary URLs (defined here for use before main definition)
+    function optimizeCloudinaryUrl(url, width = 400) {
+      if (url && url.includes('cloudinary.com') && !url.includes('/upload/w_')) {
+        return url.replace('/upload/', `/upload/w_${width},q_auto,f_auto/`);
+      }
+      return url;
     }
 
     // Load photos and distribute to sections
@@ -2049,7 +2587,8 @@
       if (index < 0 || index >= allPhotos.length) return;
       currentLightboxIndex = index;
       const photo = allPhotos[index];
-      document.getElementById('lightbox-img').src = photo.url;
+      // Use optimized image for lightbox (1200px for viewing, not full resolution)
+      document.getElementById('lightbox-img').src = optimizeCloudinaryUrl(photo.url, 1200);
       document.getElementById('lightbox-caption').textContent = photo.caption || '';
       document.getElementById('lightbox-counter').textContent = `${index + 1} / ${allPhotos.length}`;
       document.getElementById('lightbox').classList.add('active');
@@ -2121,6 +2660,339 @@
     // Initial load
     loadPhotos();
     loadJournal();
+
+    // ========== NEW FEATURES ==========
+
+    // Trip dates configuration
+    const TRIP_START = new Date('2026-01-22T06:00:00');
+    const TRIP_END = new Date('2026-02-04T18:00:00');
+    const TRIP_DAYS = 14;
+
+    // Trip schedule - where we are each day
+    const TRIP_SCHEDULE = [
+      { day: 1, date: '2026-01-22', location: 'Sacramento', icon: '🦁', section: 'sacramento', coords: { lat: 38.5816, lon: -121.4944 } },
+      { day: 2, date: '2026-01-23', location: 'San Jose', icon: '🦈', section: 'sanjose', coords: { lat: 37.3382, lon: -121.8863 } },
+      { day: 3, date: '2026-01-24', location: 'Disneyland', icon: '🏰', section: 'disney', coords: { lat: 33.8121, lon: -117.9190 } },
+      { day: 4, date: '2026-01-25', location: 'Disneyland', icon: '🏰', section: 'disney', coords: { lat: 33.8121, lon: -117.9190 } },
+      { day: 5, date: '2026-01-26', location: 'Disneyland', icon: '🏖️', section: 'disney', coords: { lat: 33.8121, lon: -117.9190 } },
+      { day: 6, date: '2026-01-27', location: 'Disneyland', icon: '🏰', section: 'disney', coords: { lat: 33.8121, lon: -117.9190 } },
+      { day: 7, date: '2026-01-28', location: "Steph's", icon: '🏠', section: 'disney', coords: { lat: 33.6595, lon: -117.9988 } },
+      { day: 8, date: '2026-01-29', location: 'Disneyland', icon: '🏰', section: 'disney', coords: { lat: 33.8121, lon: -117.9190 } },
+      { day: 9, date: '2026-01-30', location: 'Disneyland', icon: '🏰', section: 'disney', coords: { lat: 33.8121, lon: -117.9190 } },
+      { day: 10, date: '2026-01-31', location: 'Great Wolf', icon: '⚔️', section: 'greatwolf', coords: { lat: 33.8017, lon: -117.8893 } },
+      { day: 11, date: '2026-02-01', location: 'Great Wolf', icon: '🏒', section: 'greatwolf', coords: { lat: 33.8017, lon: -117.8893 } },
+      { day: 12, date: '2026-02-02', location: 'Redding', icon: '🌉', section: 'redding', coords: { lat: 40.5865, lon: -122.3917 } },
+      { day: 13, date: '2026-02-03', location: 'Redding', icon: '🚤', section: 'redding', coords: { lat: 40.5865, lon: -122.3917 } },
+      { day: 14, date: '2026-02-04', location: 'Home!', icon: '🏠', section: 'redding', coords: { lat: 45.3565, lon: -122.8420 } }
+    ];
+
+    // ========== SERVICE WORKER REGISTRATION ==========
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('Service Worker registered:', reg.scope))
+          .catch(err => console.log('Service Worker registration failed:', err));
+      });
+    }
+
+    // ========== OFFLINE DETECTION ==========
+    function updateOnlineStatus() {
+      const banner = document.getElementById('offline-banner');
+      if (!navigator.onLine) {
+        banner.classList.add('show');
+      } else {
+        banner.classList.remove('show');
+      }
+    }
+
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+    updateOnlineStatus();
+
+    // ========== TRIP PROGRESS ==========
+    function updateTripProgress() {
+      const now = new Date();
+      const progressBar = document.getElementById('trip-progress');
+      const dayEl = document.getElementById('current-day');
+      const fillEl = document.getElementById('progress-fill');
+      const textEl = document.getElementById('progress-text');
+      const iconEl = document.getElementById('location-icon');
+      const nameEl = document.getElementById('location-name');
+
+      // Before trip
+      if (now < TRIP_START) {
+        const daysUntil = Math.ceil((TRIP_START - now) / (1000 * 60 * 60 * 24));
+        dayEl.textContent = daysUntil;
+        document.querySelector('.trip-day-label').textContent = 'Days Until Trip';
+        fillEl.style.width = '0%';
+        textEl.textContent = 'The adventure begins soon!';
+        iconEl.textContent = '🏠';
+        nameEl.textContent = 'Home (Oregon)';
+        return;
+      }
+
+      // After trip
+      if (now > TRIP_END) {
+        dayEl.textContent = '✓';
+        document.querySelector('.trip-day-label').textContent = 'Trip Complete!';
+        fillEl.style.width = '100%';
+        textEl.textContent = 'What an amazing adventure!';
+        iconEl.textContent = '🏠';
+        nameEl.textContent = 'Back Home';
+        return;
+      }
+
+      // During trip - calculate current day
+      const msIntoTrip = now - TRIP_START;
+      const currentDay = Math.floor(msIntoTrip / (1000 * 60 * 60 * 24)) + 1;
+      const progress = (currentDay / TRIP_DAYS) * 100;
+
+      // Find today's schedule
+      const todaySchedule = TRIP_SCHEDULE.find(s => s.day === currentDay) || TRIP_SCHEDULE[0];
+
+      dayEl.textContent = currentDay;
+      document.querySelector('.trip-day-label').textContent = 'Day of Trip';
+      fillEl.style.width = `${progress}%`;
+      textEl.textContent = `Day ${currentDay} of ${TRIP_DAYS}`;
+      iconEl.textContent = todaySchedule.icon;
+      nameEl.textContent = todaySchedule.location;
+
+      // Highlight current destination section
+      highlightCurrentDestination(todaySchedule.section);
+
+      // Load weather for current location
+      loadWeather(todaySchedule);
+    }
+
+    // ========== HIGHLIGHT CURRENT DESTINATION ==========
+    function highlightCurrentDestination(sectionId) {
+      // Remove previous highlighting
+      document.querySelectorAll('.destination').forEach(d => {
+        d.classList.remove('currently-here');
+        const badge = d.querySelector('.currently-here-badge');
+        if (badge) badge.remove();
+      });
+
+      // Add highlighting to current section
+      const currentSection = document.getElementById(sectionId);
+      if (currentSection) {
+        currentSection.classList.add('currently-here');
+        const header = currentSection.querySelector('.destination-header h3');
+        if (header && !header.querySelector('.currently-here-badge')) {
+          const badge = document.createElement('span');
+          badge.className = 'currently-here-badge';
+          badge.textContent = 'LIVE NOW';
+          header.appendChild(badge);
+        }
+      }
+    }
+
+    // ========== WEATHER WIDGET ==========
+    async function loadWeather(schedule) {
+      const iconEl = document.getElementById('weather-icon');
+      const tempEl = document.getElementById('weather-temp');
+      const descEl = document.getElementById('weather-desc');
+      const locEl = document.getElementById('weather-location');
+
+      try {
+        // Using Open-Meteo (free, no API key needed)
+        const res = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${schedule.coords.lat}&longitude=${schedule.coords.lon}&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=America/Los_Angeles`
+        );
+        const data = await res.json();
+
+        const temp = Math.round(data.current.temperature_2m);
+        const code = data.current.weather_code;
+
+        // Weather code to emoji and description
+        const weatherMap = {
+          0: { icon: '☀️', desc: 'Clear sky' },
+          1: { icon: '🌤️', desc: 'Mainly clear' },
+          2: { icon: '⛅', desc: 'Partly cloudy' },
+          3: { icon: '☁️', desc: 'Overcast' },
+          45: { icon: '🌫️', desc: 'Foggy' },
+          48: { icon: '🌫️', desc: 'Rime fog' },
+          51: { icon: '🌧️', desc: 'Light drizzle' },
+          53: { icon: '🌧️', desc: 'Drizzle' },
+          55: { icon: '🌧️', desc: 'Heavy drizzle' },
+          61: { icon: '🌧️', desc: 'Light rain' },
+          63: { icon: '🌧️', desc: 'Rain' },
+          65: { icon: '🌧️', desc: 'Heavy rain' },
+          80: { icon: '🌦️', desc: 'Light showers' },
+          81: { icon: '🌦️', desc: 'Showers' },
+          82: { icon: '⛈️', desc: 'Heavy showers' },
+          95: { icon: '⛈️', desc: 'Thunderstorm' }
+        };
+
+        const weather = weatherMap[code] || { icon: '🌡️', desc: 'Weather data' };
+
+        iconEl.textContent = weather.icon;
+        tempEl.textContent = `${temp}°F`;
+        descEl.textContent = weather.desc;
+        locEl.textContent = `📍 ${schedule.location}`;
+
+      } catch (err) {
+        console.log('Weather fetch failed:', err);
+        iconEl.textContent = '🌡️';
+        tempEl.textContent = '--°F';
+        descEl.textContent = 'Weather unavailable';
+        locEl.textContent = `📍 ${schedule.location}`;
+      }
+    }
+
+    // ========== SCROLL ENTRANCE ANIMATIONS ==========
+    function initScrollAnimations() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      // Add animation class to destinations and highlights
+      document.querySelectorAll('.destination, .highlight-item, .cal-day').forEach(el => {
+        el.classList.add('animate-on-scroll');
+        observer.observe(el);
+      });
+    }
+
+
+    // ========== EMOJI REACTIONS (Prep for future use) ==========
+    const REACTION_EMOJIS = ['❤️', '🔥', '😂', '🤩', '👏', '💯'];
+
+    function createReactionBar(targetId, targetType = 'photo') {
+      const html = `
+        <div class="reactions-bar" data-target="${targetId}" data-type="${targetType}">
+          ${REACTION_EMOJIS.slice(0, 4).map(emoji =>
+            `<button class="reaction-btn" data-emoji="${emoji}">${emoji} <span class="count">0</span></button>`
+          ).join('')}
+          <button class="add-reaction-btn" onclick="toggleReactionPicker(this)">+</button>
+          <div class="reaction-picker">
+            ${REACTION_EMOJIS.map(emoji =>
+              `<button onclick="addReaction('${targetId}', '${emoji}', '${targetType}')">${emoji}</button>`
+            ).join('')}
+          </div>
+        </div>
+      `;
+      return html;
+    }
+
+    function toggleReactionPicker(btn) {
+      const picker = btn.nextElementSibling;
+      picker.classList.toggle('show');
+    }
+
+    async function addReaction(targetId, emoji, targetType) {
+      // Close picker
+      document.querySelectorAll('.reaction-picker.show').forEach(p => p.classList.remove('show'));
+
+      // For now, just show a toast - full implementation would save to API
+      showToast(`${emoji} reaction added!`);
+    }
+
+    // ========== MEMORY COUNTER & PHOTO OF DAY ==========
+    async function loadMemoryStats() {
+      try {
+        const res = await fetch(`${API_URL}/api/photos`);
+        const photos = await res.json();
+
+        // Update memory counter
+        const countEl = document.getElementById('photo-count');
+        const subtitleEl = document.getElementById('memory-subtitle');
+
+        countEl.textContent = photos.length;
+
+        // Count photos by day to show variety
+        const days = new Set(photos.map(p => p.day_number).filter(d => d));
+        subtitleEl.textContent = `Across ${days.size} amazing days!`;
+
+        // Photo of the Day - pick a great one
+        loadPhotoOfDay(photos);
+
+      } catch (err) {
+        console.log('Memory stats failed:', err);
+        document.getElementById('photo-count').textContent = '🎉';
+        document.getElementById('memory-subtitle').textContent = 'Making memories!';
+      }
+    }
+
+    function loadPhotoOfDay(photos) {
+      const container = document.getElementById('photo-of-day');
+
+      // Filter photos with captions (the best ones!)
+      const captionedPhotos = photos.filter(p => p.caption && p.caption.trim());
+
+      if (captionedPhotos.length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+
+      // Pick a featured photo - randomize from the best captioned ones
+      // Prioritize recent photos (higher day numbers)
+      const sortedByCaptionQuality = captionedPhotos.sort((a, b) => {
+        // Prefer longer captions (more thought put in)
+        const aScore = (a.caption?.length || 0) + (parseInt(a.day_number) || 0) * 5;
+        const bScore = (b.caption?.length || 0) + (parseInt(b.day_number) || 0) * 5;
+        return bScore - aScore;
+      });
+
+      // Pick from top 5
+      const topPhotos = sortedByCaptionQuality.slice(0, 5);
+      const featured = topPhotos[Math.floor(Math.random() * topPhotos.length)];
+
+      // Populate
+      document.getElementById('potd-image').src = optimizeCloudinaryUrl(featured.url, 600);
+      document.getElementById('potd-caption').textContent = featured.caption;
+      document.getElementById('potd-author').textContent = featured.uploaded_by || 'The Family';
+      document.getElementById('potd-day').textContent = featured.day_number ? `Day ${featured.day_number}` : '';
+
+      // Show it
+      container.classList.add('show');
+    }
+
+    // ========== HIGHLIGHT TODAY ON CALENDAR ==========
+    function highlightTodayOnCalendar() {
+      const now = new Date();
+      const month = now.getMonth() + 1; // 1-12
+      const day = now.getDate();
+
+      // Map date to calendar element
+      const dateMap = {
+        '1-22': 'Jan 22', '1-23': 'Jan 23', '1-24': 'Jan 24', '1-25': 'Jan 25',
+        '1-26': 'Jan 26', '1-27': 'Jan 27', '1-28': 'Jan 28', '1-29': 'Jan 29',
+        '1-30': 'Jan 30', '1-31': 'Jan 31', '2-1': 'Feb 1', '2-2': 'Feb 2',
+        '2-3': 'Feb 3', '2-4': 'Feb 4'
+      };
+
+      const todayKey = `${month}-${day}`;
+      const todayText = dateMap[todayKey];
+
+      if (todayText) {
+        // Find and highlight today's calendar day
+        document.querySelectorAll('.cal-day').forEach(el => {
+          el.classList.remove('today');
+          const dateEl = el.querySelector('.cal-date');
+          if (dateEl && dateEl.textContent === todayText) {
+            el.classList.add('today');
+          }
+        });
+      }
+    }
+
+    // ========== INITIALIZE ALL NEW FEATURES ==========
+    function initNewFeatures() {
+      updateTripProgress();
+      initScrollAnimations();
+      loadMemoryStats();
+      highlightTodayOnCalendar();
+
+      // Update progress every minute
+      setInterval(updateTripProgress, 60000);
+    }
+
+    // Run after DOM is ready
+    initNewFeatures();
   </script>
 
 </body>
